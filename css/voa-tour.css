@@ -1,0 +1,87 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.navbar-inverse {
+	xxxxbackground-color: #1330bf;
+}
+
+.jumbotron {
+	background-image: url(../img/voa-building-jumbotron.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.jumbotron p {
+	color: #fff;
+}
+
+.teaser-img {
+	background-color: gray;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: block;
+	height: 160px;
+	width: 100%;
+}
+
+.about-teaser { background-image: url(../img/voa-studio-tvbars.jpg); }
+.whattobring-teaser { background-image: url(../img/travel-documents.jpg); }
+.directions-teaser { background-image: url(../img/voa-directions.jpg); }
+
+
+
+.ui-widget-content {
+	background: #ddd;
+	border: 0;
+}
+
+.ui-slider-horizontal {
+	height: 0.4em;
+}
+
+.ui-slider-horizontal.ui-slider-pips {
+	margin-top: 2em;
+	margin-bottom: 4em;
+}
+
+.ui-slider-pips .ui-slider-line {
+	background-color: #ddd;
+	height: 2em;
+}
+
+.ui-slider-pips .ui-slider-pip {
+	top: -0.75em;
+	z-index: -1;
+}
+
+.ui-slider-pips .ui-slider-label {
+	top: 2.75em;
+}
+
+.ui-slider .ui-slider-range {
+    background: #1330bf;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+	top: -0.45em;
+	border-radius: 12px;
+	margin-left: -0.5em;
+}
+
+.ui-widget-content .ui-state-default {
+	background: #fff;
+	border: 3px solid #1330bf;
+}
+
+.ui-widget-content .ui-state-hover /*, 
+.ui-widget-content .ui-state-focus*/ {
+	background: #1330bf;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { border-bottom-right-radius: 0px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl  { border-bottom-left-radius: 0px; }
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr    { border-top-right-radius: 0px; }
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl     { border-top-left-radius: 0px; }
