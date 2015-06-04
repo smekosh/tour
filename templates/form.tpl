@@ -3,8 +3,8 @@
 {block name="head"}
 
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery-ui-slider-pips.css">
+<link rel="stylesheet" type="text/css" href="{$homepage}/css/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css" href="{$homepage}/css/jquery-ui-slider-pips.css">
 
 {/block}
 
@@ -150,5 +150,63 @@
 -->*}
 
 </form>
+
+{/block}
+
+
+{block name="footer"}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/jquery.datetimepicker.js"></script>
+<script src="js/jquery-ui-slider-pips.min.js"></script>
+
+<script type="text/javascript">
+
+jQuery(function($){
+    $("#groupSize").slider({ min: 1, max: 20, range: true });
+    $("#groupSize").slider("pips" , {
+        rest: "label",
+        slide: function( event, ui ) {}
+    });
+
+    $('.ui-slider-handle:first').css( 'display', 'none' );
+
+    /*$( '.ui-slider-handle' ).click(function() {
+    console.log( $('.ui-slider-range').css('background-color') );
+});*/
+
+$( "#groupSize" ).on( "slide", function( event, ui ) {
+    console.log('sliding');
+});
+
+});
+
+
+// Date.parseDate = function( input, format ){
+// 	return moment(input,format).toDate();
+// };
+
+// Date.prototype.dateFormat = function( format ){
+// 	return moment(this).format(format);
+// };
+
+jQuery('#datetimepicker3').datetimepicker({
+    format:'DD.MM.YYYY h:mm a',
+    //formatTime:'h:mm a',
+    //formatDate:'DD.MM.YYYY',
+    dayOfWeekStart: 1,
+    inline:true,
+    lang:'en',
+    /*allowTimes:[
+    '12:00', '14:30'
+    ],*/
+    formatTimeScroller: 'g:i A'
+});
+</script>
 
 {/block}
