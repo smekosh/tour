@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="{$homepage}/favicon.ico">
     <title>{$title|default:"VOA Tour"}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{$homepage}/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/voa-tour.css" rel="stylesheet">
+    <link href="{$homepage}/css/voa-tour.css" rel="stylesheet">
 {block name="head"}
 {/block}
 
@@ -73,7 +73,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{$homepage}/js/bootstrap.min.js"></script>
 
 {block name="footer"}{/block}
 </body>
