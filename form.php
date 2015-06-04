@@ -5,4 +5,4 @@ if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
 $smarty = new Smarty();
 $smarty->assign( "homepage", HOMEPAGE );
-$smarty->display( "index.tpl" );
+$smarty->display( "form.tpl" );
