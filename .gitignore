@@ -5,3 +5,4 @@ templates_c
 templates_c/*
 cache
 cache/*
+composer.lock
