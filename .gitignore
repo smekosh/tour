@@ -1,0 +1,7 @@
+config.php
+vendor
+vendor/*
+templates_c
+templates_c/*
+cache
+cache/*
