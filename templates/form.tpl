@@ -63,32 +63,25 @@
                         <table class="table table-striped">
                             <tr>
                                 <th>Date</th>
-                                <th colspan="2">Tour 1</th>
-                                <th colspan="2">Tour 2</th>
+                                <th colspan="2">Tour</th>
                             </tr>
 
                             <tr>
                                 <td>Wednesday, August 20</td>
                                 <td><label class="btn btn-success"><input type="radio" name="tour_id" value="20140820_1200_01"> 12 pm</label></td>
                                 <td>12 spots left</td>
-                                <td><label class="btn btn-success"><input type="radio" name="tour_id" value="20140820_1430_01"> 2:30 pm</label></td>
-                                <td>18 spots left</td>
                             </tr>
 
                             <tr>
                                 <td>Thursday, August 21</td>
                                 <td><label class="btn btn-success"><input type="radio" name="tour_id" value="20140821_1200_01"> 12 pm</label></td>
                                 <td>19 spots left</td>
-                                <td><label class="btn btn-success"><input type="radio" name="tour_id" value="20140821_1430_01"> 2:30 pm</label></td>
-                                <td>6 spots left</td>
                             </tr>
 
                             <tr>
                                 <td>Friday, August 22</td>
                                 <td><label class="btn btn-success"><input type="radio" name="tour_id" value="20140822_1200_01"> 12 pm</label></td>
                                 <td>20 spots left</td>
-                                <td><label class="btn btn-success"><input type="radio" name="tour_id" value="20140822_1430_01"> 2:30 pm</label></td>
-                                <td>9 spots left</td>
                             </tr>
                         </table>
                     </div>
@@ -178,11 +171,11 @@ jQuery(function($){
 
     /*$( '.ui-slider-handle' ).click(function() {
     console.log( $('.ui-slider-range').css('background-color') );
-});*/
+    });*/
 
-$( "#groupSize" ).on( "slide", function( event, ui ) {
-    console.log('sliding');
-});
+    $( "#groupSize" ).on( "slide", function( event, ui ) {
+        console.log('sliding');
+    });
 
 });
 
@@ -196,7 +189,7 @@ $( "#groupSize" ).on( "slide", function( event, ui ) {
 // };
 
 jQuery('#datetimepicker3').datetimepicker({
-    format:'DD.MM.YYYY h:mm a',
+    format:'DD.MM.YYYY',
     //formatTime:'h:mm a',
     //formatDate:'DD.MM.YYYY',
     dayOfWeekStart: 1,

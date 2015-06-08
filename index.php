@@ -4,15 +4,6 @@ require( "vendor/autoload.php" );
 require( "class.db.php" );
 if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
-$db = new VOA_DB(
-    MYSQL_HOST,
-    MYSQL_DATABASE,
-    MYSQL_USER,
-    MYSQL_PASS
-);
-
-// $t = $db->Query("show tables");
-
 $smarty = new Smarty();
 $smarty->assign( "homepage", HOMEPAGE );
 
@@ -23,8 +14,12 @@ if( !isset( $_GET['page']) ) {
         case 'about': $page = "about.tpl"; break;
         case 'directions': $page = "directions.tpl"; break;
         case 'bring': $page = "bring.tpl"; break;
-        case 'form': $page = "form.tpl"; break;
+        case 'visit': $page = "form.tpl"; break;
         case '404': $page = "404.tpl"; break;
+        case 'admin':
+            $page = "admin.tpl";
+            include( "index_admin.php" );
+        break;
     }
 }
 
