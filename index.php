@@ -15,4 +15,15 @@ $db = new VOA_DB(
 
 $smarty = new Smarty();
 $smarty->assign( "homepage", HOMEPAGE );
-$smarty->display( "index.tpl" );
+
+if( !isset( $_GET['page']) ) {
+    $page = "index.tpl";
+} else {
+    switch( $_GET['page'] ) {
+        case 'about': $page = "about.tpl"; break;
+        case 'directions': $page = "directions.tpl"; break;
+        case 'bring': $page = "bring.tpl"; break;
+    }
+}
+
+$smarty->display( $page );

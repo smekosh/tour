@@ -1,0 +1,7 @@
+RewriteEngine on
+
+RewriteRule about/ index.php?page=about
+RewriteRule directions/ index.php?page=directions
+RewriteRule what-to-bring/ index.php?page=bring
+
+RewriteRule visit/ form.php?page=visit
