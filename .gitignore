@@ -6,3 +6,4 @@ templates_c/*
 cache
 cache/*
 composer.lock
+.htaccess
