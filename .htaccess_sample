@@ -1,4 +1,8 @@
 RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+ErrorDocument 404 /tour/index.php?page=404
 
 RewriteRule about/ index.php?page=about
 RewriteRule directions/ index.php?page=directions
