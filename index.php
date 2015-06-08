@@ -23,6 +23,7 @@ if( !isset( $_GET['page']) ) {
         case 'about': $page = "about.tpl"; break;
         case 'directions': $page = "directions.tpl"; break;
         case 'bring': $page = "bring.tpl"; break;
+        case 'form': $page = "form.tpl"; break;
         case '404': $page = "404.tpl"; break;
     }
 }
