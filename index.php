@@ -2,6 +2,7 @@
 require( "config.php" );
 require( "vendor/autoload.php" );
 require( "class.db.php" );
+require( "class.calendar.php" );
 if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
 $smarty = new Smarty();
