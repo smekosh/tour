@@ -9,6 +9,6 @@ ErrorDocument 404 /index.php?page=404
 RewriteRule about/ index.php?page=about
 RewriteRule directions/ index.php?page=directions
 RewriteRule what-to-bring/ index.php?page=bring
-RewriteRule visit/ index.php?page=form
+RewriteRule visit/ index.php?page=visit
 
 RewriteRule admin/ index.php?page=admin
