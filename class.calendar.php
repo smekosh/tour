@@ -25,6 +25,9 @@ class VOA_Calendar {
         $this->start->setDate( $year, $month, 1 );
 
         $this->days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+        $this->end = clone $this->start;
+        $this->end->modify( "+1 month -1 day" );
     }
 
     function getMonth() {
@@ -34,12 +37,14 @@ class VOA_Calendar {
         $offset = $this->week[$first];
         $days = array_fill(0, $offset, "");
 
+        $temp = clone $this->start;
+
         # fill in days of the month
         for( $i = 0; $i < $this->days; $i++ ) {
-            $day = $this->start->format("Y-m-d");
+            $day = $temp->format("Y-m-d");
             $days[] = $day;
 
-            $this->start->add(new DateInterval("P1D"));
+            $temp->add(new DateInterval("P1D"));
         }
 
         # reorganize by week

@@ -11,4 +11,4 @@ RewriteRule directions/ index.php?page=directions
 RewriteRule what-to-bring/ index.php?page=bring
 RewriteRule visit/ index.php?page=visit
 
-RewriteRule admin/ index.php?page=admin
+RewriteRule admin/ index.php?page=admin [QSA]

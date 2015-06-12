@@ -4,6 +4,7 @@
 <style type="text/css">
 td { height: 8em}
 .nyet { background-color: silver }
+.visitor_count { border-radius:3em; border:3px solid silver}
 </style>
 {/block}
 
@@ -38,6 +39,9 @@ td { height: 8em}
     {foreach from=$week item=day}
         <td class="{if $day|date_format:"D" == "Sun" || $day|date_format:"D" == "Sat" || $day == ""}nyet{/if}">
             <p>{$day|date_format:"%#d"}</p>
+{if isset($reserved[$day])}
+<div class="visitor_count">{$reserved[$day].count}</div>
+{/if}
         </td>
     {/foreach}
 </tr>
@@ -45,9 +49,6 @@ td { height: 8em}
 </tbody>
 </table>
 
-{foreach from=$data item=day}
-<pre>{$day|print_r}</pre>
-{/foreach}
 </div>
 
 {/block}
