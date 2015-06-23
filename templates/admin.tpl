@@ -4,7 +4,16 @@
 <style type="text/css">
 td { height: 8em}
 .nyet { background-color: silver }
-.visitor_count { border-radius:3em; border:3px solid silver}
+.visitor_count {
+    background-color: black;
+    border: 3px solid black;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    height: 40px;
+    text-align: center;
+    width: 40px;
+}
 </style>
 {/block}
 
