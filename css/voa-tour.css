@@ -76,7 +76,7 @@ body {
 	border: 3px solid #1330bf;
 }
 
-.ui-widget-content .ui-state-hover /*, 
+.ui-widget-content .ui-state-hover /*,
 .ui-widget-content .ui-state-focus*/ {
 	background: #1330bf;
 }
@@ -85,3 +85,9 @@ body {
 .ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl  { border-bottom-left-radius: 0px; }
 .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr    { border-top-right-radius: 0px; }
 .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl     { border-top-left-radius: 0px; }
+
+footer {
+    margin-top:3em;
+    padding-top:3em;
+    border-top:1px dotted silver;
+}
