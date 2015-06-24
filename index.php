@@ -5,23 +5,48 @@ require( "class.db.php" );
 require( "class.calendar.php" );
 if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
-$smarty = new Smarty();
-$smarty->assign( "homepage", HOMEPAGE );
+// ===========================================================================
+// routing - works for / or /tour/
+// ===========================================================================
+$klein = new \Klein\Klein();
+$request = \Klein\Request::createFromGlobals();
+$uri = $request->server()->get('REQUEST_URI');
+$request->server()->set('REQUEST_URI', substr($uri, strlen(APP_PATH)));
 
-if( !isset( $_GET['page']) ) {
-    $page = "index.tpl";
-} else {
-    switch( $_GET['page'] ) {
-        case 'about': $page = "about.tpl"; break;
-        case 'directions': $page = "directions.tpl"; break;
-        case 'bring': $page = "bring.tpl"; break;
-        case 'visit': $page = "form.tpl"; break;
-        case '404': $page = "404.tpl"; break;
-        case 'admin':
-            $page = "admin.tpl";
-            include( "index_admin.php" );
-        break;
-    }
+// ===========================================================================
+// lazy service create
+// ===========================================================================
+$klein->respond(function($request, $response, $service, $app) {
+    $app->register('smarty', function() {
+        $smarty = new Smarty();
+        $smarty->assign( "homepage", HOMEPAGE );
+        return( $smarty );
+    });
+});
+
+// ===========================================================================
+// simple pages
+// ===========================================================================
+$simple_pages = array(
+    "/" =>                  "index",
+    "/about/" =>            "about",
+    "/directions/" =>       "directions",
+    "/what-to-bring/" =>    "bring",
+    "/visit/" =>            "form"
+);
+
+foreach( $simple_pages as $route => $template ) {
+    $klein->respond($route, function($req, $resp, $svc, $app) use ($template) {
+        $app->smarty->assign("page", $template);
+        return( $app->smarty->fetch( "{$template}.tpl" ) );
+    });
 }
 
-$smarty->display( $page );
+// ===========================================================================
+// something's amiss
+// ===========================================================================
+$klein->onHttpError(function($code, $router) use (&$klein) {
+    $router->app()->smarty->display("404.tpl");
+});
+
+$klein->dispatch($request);

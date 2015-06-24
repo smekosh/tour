@@ -45,11 +45,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="{if !isset($smarty.get.page)}active{/if}"><a href="{$homepage}/">Home</a></li>
-                    <li class="{if $smarty.get.page == "about"}active{/if}"><a href="{$homepage}/about/">About the Tour</a></li>
-                    <li class="{if $smarty.get.page == "visit"}active{/if}"><a href="{$homepage}/visit/">Take the Tour</a></li>
-                    <li class="{if $smarty.get.page == "directions"}active{/if}"><a href="{$homepage}/directions/">Address &amp; Directions</a></li>
-                    <li class="{if $smarty.get.page == "bring"}active{/if}"><a href="{$homepage}/what-to-bring/">What to Bring</a></li>
+                    <li class="{if $page == "index"}active{/if}"><a href="{$homepage}/">Home</a></li>
+                    <li class="{if $page == "about"}active{/if}"><a href="{$homepage}/about/">About the Tour</a></li>
+                    <li class="{if $page == "form"}active{/if}"><a href="{$homepage}/visit/">Take the Tour</a></li>
+                    <li class="{if $page == "directions"}active{/if}"><a href="{$homepage}/directions/">Address &amp; Directions</a></li>
+                    <li class="{if $page == "bring"}active{/if}"><a href="{$homepage}/what-to-bring/">What to Bring</a></li>
                 </ul>
             </div><!--/.navbar-collapse -->
         </div>

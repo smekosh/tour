@@ -2,6 +2,7 @@
 
 // no trailing slash
 define( "HOMEPAGE",         "http://localhost/tour" );
+define( "APP_PATH",         "/" );
 
 // don't allow direct-access to files
 define( "PROGRAM_RUNNING",  true );
