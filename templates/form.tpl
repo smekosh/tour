@@ -17,6 +17,52 @@
 
 {block name="body"}
 
+<div id="carousel-example-generic" class="carousel slide" data-interval="false" data-wrap="false" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            {include file="form_slide1.tpl"}
+            <div class="carousel-caption">Step 1/5</div>
+        </div>
+        <div class="item">
+            {include file="form_slide2.tpl"}
+            <div class="carousel-caption">Step 2/5</div>
+        </div>
+        <div class="item">
+            {include file="form_slide3.tpl"}
+            <div class="carousel-caption">Step 3/5</div>
+        </div>
+        <div class="item">
+            {include file="form_slide4.tpl"}
+            <div class="carousel-caption">Step 4/5</div>
+        </div>
+        <div class="item">
+            {include file="form_slide5.tpl"}
+            <div class="carousel-caption">Step 5/5</div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
 {*<!--
 <form role="form">
 <div class="form-group">
@@ -37,7 +83,6 @@
 </div>
 <button type="submit" class="btn btn-default">Submit</button>
 </form>
--->*}
 
 <form class="form" role="form">
 
@@ -89,6 +134,7 @@
             </div>
         </div>
     </div>
+-->*}
 
     {*<!--
     <div class="form-group form-group-lg">
@@ -140,10 +186,10 @@
 </select>
 </div>
 </div>
--->*}
 
 </form>
 
+-->*}
 {/block}
 
 
@@ -161,22 +207,40 @@
 <script type="text/javascript">
 
 jQuery(function($){
-    $("#groupSize").slider({ min: 1, max: 20, range: true });
+
+    $("#groupSize").slider({ min: 1, max: 20, range: false });
     $("#groupSize").slider("pips" , {
         rest: "label",
         slide: function( event, ui ) {}
     });
 
-    $('.ui-slider-handle:first').css( 'display', 'none' );
+    // $('.ui-slider-handle:first').css( 'display', 'none' );
 
     /*$( '.ui-slider-handle' ).click(function() {
     console.log( $('.ui-slider-range').css('background-color') );
     });*/
 
     $( "#groupSize" ).on( "slide", function( event, ui ) {
-        console.log('sliding');
+        // console.log('sliding');
     });
 
+    jQuery('#datetimepicker3').datetimepicker({
+        format:'DD.MM.YYYY',
+        //formatTime:'h:mm a',
+        //formatDate:'DD.MM.YYYY',
+        dayOfWeekStart: 1,
+        inline:true,
+        lang:'en',
+        /*allowTimes:[
+        '12:00', '14:30'
+        ],*/
+        formatTimeScroller: 'g:i A'
+    });
+
+    $("button.tour_type").click(function() {
+        $("button.tour_type").removeClass("btn-success");
+        $(this).addClass("btn-success");
+    });
 });
 
 
@@ -188,18 +252,6 @@ jQuery(function($){
 // 	return moment(this).format(format);
 // };
 
-jQuery('#datetimepicker3').datetimepicker({
-    format:'DD.MM.YYYY',
-    //formatTime:'h:mm a',
-    //formatDate:'DD.MM.YYYY',
-    dayOfWeekStart: 1,
-    inline:true,
-    lang:'en',
-    /*allowTimes:[
-    '12:00', '14:30'
-    ],*/
-    formatTimeScroller: 'g:i A'
-});
 </script>
 
 {/block}
