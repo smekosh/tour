@@ -43,6 +43,16 @@ foreach( $simple_pages as $route => $template ) {
 }
 
 // ===========================================================================
+// form processor
+// ===========================================================================
+$klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use ($template) {
+    #$svc->validateParam("number_of_visitors"
+    $p = $req->params();
+    print_r( $p );
+    die;
+});
+
+// ===========================================================================
 // something's amiss
 // ===========================================================================
 $klein->onHttpError(function($code, $router) use (&$klein) {

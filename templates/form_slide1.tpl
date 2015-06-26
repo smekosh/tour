@@ -16,8 +16,8 @@
 
 <div class="col-sm-12">
     <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default tour_type">Daily tour at noon</button>
-        <button type="button" class="btn btn-default tour_type">Requesting a special tour outside of normal hours</button>
+        <button type="button" data-type="Daily" class="btn btn-default tour_type">Daily tour at noon</button>
+        <button type="button" data-type="Special" class="btn btn-default tour_type">Requesting a special tour outside of normal hours</button>
     </div>
 </div>
 

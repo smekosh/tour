@@ -1,14 +1,13 @@
 <div class="col-sm-12">
 
     <h4>Organizer's name</h4>
-    <input type="text" class="form-control" placeholder="ex: John Smith" id="organizer-name" />
+    <input type="text" class="form-control organizer_info" placeholder="ex: John Smith" data-id="organizer_name" />
 
     <h4>Organizer's phone number</h4>
-    <input type="text" class="form-control" placeholder="ex: John Smith" id="organizer-phone" />
+    <input type="text" class="form-control organizer_info" placeholder="ex: John Smith" data-id="organizer_phone" />
 
     <h4>Organizer's email address</h4>
-    <input type="text" class="form-control" placeholder="ex: john@example.com" id="organizer-email" />
-
+    <input type="text" class="form-control organizer_info" placeholder="ex: john@example.com" data-id="organizer_email" />
 
     <div id="other_guests"></div>
 
