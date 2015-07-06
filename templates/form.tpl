@@ -81,6 +81,7 @@ function Form_Payload() {
         "organizer_name": { label: "Organizer's name", value: null },
         "organizer_phone": { label: "Organizer's phone number", value: null },
         "organizer_email": { label: "Organizer's email address", value: null },
+        "guests": { label: "Guests", value: null },
         "interests": { label: "Interests", value: null },
         "notes": { label: "Notes", value: null }
     };
@@ -92,6 +93,12 @@ Form_Payload.prototype.getJSON = function() {
         if( v.value == null) v.value = "n/a";
         r[k] = v.value;
     })(k, this.data[k]);
+
+    r["guests"] = [];
+    for( var i = 0; i < this.data.number_of_visitors.value; i++ ) {
+        r["guests"].push( $("#other_guests input:eq(" + i + ")"));
+    }
+
     return( r );
 }
 
@@ -108,12 +115,26 @@ Form_Payload.prototype.Set = function( key, value ) {
     this.Recap();
 }
 
+Form_Payload.prototype.resize_other_guests = function() {
+    var requested = this.data["number_of_visitors"].value - 2;
+    var count = $("#other_guests input").length;
+
+    $("#other_guests .input-group").show();
+    $("#other_guests .input-group:gt(" + parseInt(requested) + ")").hide();
+
+    console.info( requested, count );
+}
+
 Form_Payload.prototype.Recap = function() {
     var ul = [];
     for( var k in this.data )(function(k, v) {
+        if( typeof v.value === "undefined" ) return(false);
+
         if( v.value == null ) v.value = "n/a";
         ul.push( v.label + ": " + v.value);
     })(k, this.data[k]);
+
+    this.resize_other_guests();
 
     $("#recap").html("<ul><li>" + ul.join("</li><li>") + "</li></ul>");
 }
@@ -121,6 +142,15 @@ Form_Payload.prototype.Recap = function() {
 var VOA_form = new Form_Payload();
 
 jQuery(function($){
+
+    var fragment = $("#other_guests").html();
+
+    for( var i = 3; i <= 20; i++ )(function(count) {
+        $("#other_guests").append( fragment );
+
+        $("#other_guests span:last").html(count);
+        $("#other_guests span:last").attr("key", i-3);
+    })(i);
 
     $("#groupSize").slider({ min: 1, max: 20, range: false });
     $("#groupSize").slider("pips" , {
