@@ -76,5 +76,8 @@
     <script src="{$homepage}/js/bootstrap.min.js"></script>
 
 {block name="footer"}{/block}
+
+{$post_footer}
+
 </body>
 </html>

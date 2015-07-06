@@ -20,6 +20,7 @@ $klein->respond(function($request, $response, $service, $app) {
     $app->register('smarty', function() {
         $smarty = new Smarty();
         $smarty->assign( "homepage", HOMEPAGE );
+        $smarty->assign( "post_footer", FOOTER );
         return( $smarty );
     });
 });
@@ -34,6 +35,11 @@ $simple_pages = array(
     "/what-to-bring/" =>    "bring",
     "/visit/" =>            "form"
 );
+
+// maintenance mode, set in config
+if( DISABLE_SIGNUP === true ) {
+    $simple_pages["/visit/"] = "form-disabled";
+}
 
 foreach( $simple_pages as $route => $template ) {
     $klein->respond($route, function($req, $resp, $svc, $app) use ($template) {
