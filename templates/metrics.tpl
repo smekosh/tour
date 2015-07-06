@@ -11,18 +11,18 @@ var utag_data = {
     platform:"Desktop",
     platform_short:"D",
     runs_js:"Yes",
-    page_title:"VOA Studio Tour",
+    page_title:"{$title}",
     page_type:"Section",
-    page_name:"VOA Studio Tour",
-    short_headline:"VOA Studio Tour",
-    long_headline:"VOA Studio Tour",
-    headline:"VOA Studio Tour",
+    page_name:"{$title}",
+    short_headline:"{$title}",
+    long_headline:"{$title}",
+    headline:"{$title}",
     content_type:"Section",
     pub_year:"2015",
     pub_month:"07",
     pub_day:"06",
     pub_weekday:"Monday",
-    slug:"voa-studio-tour"
+    slug:"{$page}"
 }
 </script>
 

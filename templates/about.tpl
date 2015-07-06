@@ -1,9 +1,5 @@
 {extends file="index.tpl"}
 
-{block name="title"}
-    <title>About | VOA Studio Tour</title>
-{/block}
-
 {block name="jumbotron"}
 
 <h1>About The VOA Tour</h1>

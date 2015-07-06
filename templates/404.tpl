@@ -1,9 +1,5 @@
 {extends file="index.tpl"}
 
-{block name="title"}
-    <title>Page not found | VOA Studio Tour</title>
-{/block}
-
 {block name="jumbotron"}
 
 <h1>Page Not Found</h1>

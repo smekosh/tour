@@ -1,3 +1,16 @@
+{capture}
+{if $page == "index"}
+    {$title = "VOA Studio Tour"}
+{elseif $page == "about"}
+    {$title = "About | VOA Studio Tour"}
+{elseif $page == "directions"}
+    {$title = "Directions | VOA Studio Tour"}
+{elseif $page == "bring"}
+    {$title = "What to Bring | VOA Studio Tour"}
+{elseif $page == "form"}
+    {$title = "Visit | VOA Studio Tour"}
+{/if}
+{/capture}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +20,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{$homepage}/favicon.ico">
-{block name="title"}
-    <title>VOA Studio Tour</title>
-{/block}
+    <title>{$title}</title>
+
     <!-- Bootstrap core CSS -->
     <link href="{$homepage}/css/bootstrap.min.css" rel="stylesheet">
 
