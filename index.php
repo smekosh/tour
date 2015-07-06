@@ -10,6 +10,7 @@ if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 // ===========================================================================
 $klein = new \Klein\Klein();
 $request = \Klein\Request::createFromGlobals();
+$mail = new PHPMailer();
 
 //  or /tour/
 if( DEVELOPMENT_MODE === true ) {
