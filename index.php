@@ -6,12 +6,16 @@ require( "class.calendar.php" );
 if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
 // ===========================================================================
-// routing - works for / or /tour/
+// routing - works for /
 // ===========================================================================
 $klein = new \Klein\Klein();
 $request = \Klein\Request::createFromGlobals();
-$uri = $request->server()->get('REQUEST_URI');
-$request->server()->set('REQUEST_URI', substr($uri, strlen(APP_PATH)));
+
+//  or /tour/
+if( DEVELOPMENT_MODE === true ) {
+    $uri = $request->server()->get('REQUEST_URI');
+    $request->server()->set('REQUEST_URI', substr($uri, strlen(APP_PATH)));
+}
 
 // ===========================================================================
 // lazy service create

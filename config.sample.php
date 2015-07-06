@@ -7,6 +7,9 @@ define( "APP_PATH",         "/" );
 // maintenance mode, direct visitors to call
 define( "DISABLE_SIGNUP",   false );
 
+// development mode, route altered for /subfolder/
+define( "DEVELOPMENT_MODE", false );
+
 // don't allow direct-access to files
 define( "PROGRAM_RUNNING",  true );
 
