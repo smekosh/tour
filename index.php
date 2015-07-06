@@ -24,7 +24,7 @@ $klein->respond(function($request, $response, $service, $app) {
     $app->register('smarty', function() {
         $smarty = new Smarty();
         $smarty->assign( "homepage", HOMEPAGE );
-        $smarty->assign( "post_footer", FOOTER );
+        $smarty->assign( "DEVELOPMENT_MODE", DEVELOPMENT_MODE );
         return( $smarty );
     });
 });

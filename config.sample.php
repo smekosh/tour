@@ -17,13 +17,3 @@ define( "MYSQL_HOST",       "localhost" );
 define( "MYSQL_USER",       "username" );
 define( "MYSQL_PASS",       "password" );
 define( "MYSQL_DATABASE",   "database" );
-
-// added to bottom of each page
-define( "FOOTER",             <<<EOF
-
-<!-- metrics code here -->
-
-<!-- end metrics -->
-
-EOF
-);

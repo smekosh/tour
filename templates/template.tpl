@@ -7,8 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{$homepage}/favicon.ico">
-    <title>{$title|default:"VOA Tour"}</title>
-
+{block name="title"}
+    <title>VOA Studio Tour</title>
+{/block}
     <!-- Bootstrap core CSS -->
     <link href="{$homepage}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,6 +33,9 @@
     <![endif]-->
 </head>
 <body>
+
+{include file="metrics.tpl"}
+
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -76,8 +80,6 @@
     <script src="{$homepage}/js/bootstrap.min.js"></script>
 
 {block name="footer"}{/block}
-
-{$post_footer}
 
 </body>
 </html>

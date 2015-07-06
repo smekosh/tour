@@ -1,5 +1,9 @@
 {extends file="template.tpl"}
 
+{block name="title"}
+    <title>Visit | VOA Studio Tour</title>
+{/block}
+
 {block name="head"}
 
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
