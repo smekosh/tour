@@ -81,7 +81,7 @@ function Form_Payload() {
         "organizer_name": { label: "Organizer's name", value: null },
         "organizer_phone": { label: "Organizer's phone number", value: null },
         "organizer_email": { label: "Organizer's email address", value: null },
-        "guests": { label: "Guests", value: null },
+        "guests": { label: "Guests", list: true, value: [] },
         "interests": { label: "Interests", value: null },
         "notes": { label: "Notes", value: null }
     };
@@ -94,10 +94,10 @@ Form_Payload.prototype.getJSON = function() {
         r[k] = v.value;
     })(k, this.data[k]);
 
-    r["guests"] = [];
+    /*r["guests"] = [];
     for( var i = 0; i < this.data.number_of_visitors.value; i++ ) {
         r["guests"].push( $("#other_guests input:eq(" + i + ")"));
-    }
+    }*/
 
     return( r );
 }
@@ -110,8 +110,14 @@ Form_Payload.prototype.slideChanged = function(id) {
     if( id <= 3 ) $(".right.carousel-control").show();
 }
 
-Form_Payload.prototype.Set = function( key, value ) {
-    this.data[key].value = value;
+Form_Payload.prototype.Set = function( key, value, that ) {
+    if( typeof this.data[key].value == "object" ) {
+        // this.data[key].value.push( value );
+        var array_key = $(that).attr("key");
+        this.data[key].value[array_key] = value;
+    } else {
+        this.data[key].value = value;
+    }
     this.Recap();
 }
 
@@ -121,8 +127,6 @@ Form_Payload.prototype.resize_other_guests = function() {
 
     $("#other_guests .input-group").show();
     $("#other_guests .input-group:gt(" + parseInt(requested) + ")").hide();
-
-    console.info( requested, count );
 }
 
 Form_Payload.prototype.Recap = function() {
@@ -130,6 +134,7 @@ Form_Payload.prototype.Recap = function() {
     for( var k in this.data )(function(k, v) {
         if( typeof v.value === "undefined" ) return(false);
 
+        // single-value key
         if( v.value == null ) v.value = "n/a";
         ul.push( v.label + ": " + v.value);
     })(k, this.data[k]);
@@ -145,12 +150,16 @@ jQuery(function($){
 
     var fragment = $("#other_guests").html();
 
+    // variable guest size
     for( var i = 3; i <= 20; i++ )(function(count) {
         $("#other_guests").append( fragment );
-
         $("#other_guests span:last").html(count);
-        $("#other_guests span:last").attr("key", i-3);
     })(i);
+
+    // update key hints
+    $("#other_guests input").each(function(k,v) {
+        $(this).attr("key", k);
+    });
 
     $("#groupSize").slider({ min: 1, max: 20, range: false });
     $("#groupSize").slider("pips" , {
@@ -194,7 +203,7 @@ jQuery(function($){
         var k = $(this).attr("data-id");
         var v = $(this).val();
 
-        VOA_form.Set(k, v);
+        VOA_form.Set(k, v, this);
     });
 
     $("#send_request").click( function() {

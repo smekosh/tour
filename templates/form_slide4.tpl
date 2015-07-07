@@ -9,13 +9,3 @@
     <input type="text" class="form-control organizer_info" placeholder="" data-id="notes" />
 
 </div>
-
-{*<!--
-<p>====================</p>
-<p>SLIDE 4</p>
-<p>====================</p>
-<p>Interests (ex: moldova, tech, bla)</p>
-<p>additional notes</p>
-<p>source: where did you hear about us</p>
-
--->*}

@@ -14,7 +14,7 @@
     <div id="other_guests">
         <div class="input-group">
             <span class="input-group-addon">2</span>
-            <input type="text" class="form-control organizer_info" autocomplete="off" />
+            <input type="text" class="form-control organizer_info" autocomplete="off" data-id="guests" />
         </div>
     </div>
 
