@@ -1,8 +1,9 @@
 <?php
 require( "config.php" );
 require( "vendor/autoload.php" );
-require( "class.db.php" );
 require( "class.calendar.php" );
+require( "class.data.php" );
+
 if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
 // ===========================================================================
@@ -10,13 +11,21 @@ if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 // ===========================================================================
 $klein = new \Klein\Klein();
 $request = \Klein\Request::createFromGlobals();
-$mail = new PHPMailer();
 
 //  or /tour/
 if( DEVELOPMENT_MODE === true ) {
     $uri = $request->server()->get('REQUEST_URI');
     $request->server()->set('REQUEST_URI', substr($uri, strlen(APP_PATH)));
 }
+
+// lets see if sendmail has a neat queue mode
+$mail = new PHPMailer();
+
+// may want to selectively activate this as-needed
+use Illuminate\Database\Capsule\Manager as Capsule;
+$capsule = new Capsule;
+$capsule->addConnection($DATABASE_CONNECTION);
+$capsule->bootEloquent();
 
 // ===========================================================================
 // lazy service create

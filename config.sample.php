@@ -13,7 +13,14 @@ define( "DEVELOPMENT_MODE", false );
 // don't allow direct-access to files
 define( "PROGRAM_RUNNING",  true );
 
-define( "MYSQL_HOST",       "localhost" );
-define( "MYSQL_USER",       "username" );
-define( "MYSQL_PASS",       "password" );
-define( "MYSQL_DATABASE",   "database" );
+// settings for eloquent
+$DATABASE_CONNECTION = array(
+    "driver" => "mysql",
+    "host" => "localhost",
+    "database" => "database",
+    "username" => "username",
+    "password" => "password",
+    "charset" => "utf8",
+    "collation" => "utf8_unicode_ci",
+    "prefix" => ""
+);
