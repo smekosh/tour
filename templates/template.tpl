@@ -9,6 +9,8 @@
     {$title = "What to Bring | VOA Studio Tour"}
 {elseif $page == "form"}
     {$title = "Visit | VOA Studio Tour"}
+{elseif $page == "form-disabled"}
+    {$title = "Visit | VOA Studio Tour"}
 {/if}
 {/capture}
 <!DOCTYPE html>
