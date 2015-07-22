@@ -4,6 +4,10 @@
 define( "HOMEPAGE",         "http://localhost/tour" );
 define( "APP_PATH",         "/" );
 
+// rudimentary control, allows for number adjustments and calendar block-offs
+define( "ADMIN_USERNAME",   "admin-username" );
+define( "ADMIN_PASSWORD",   "enter-password-here" );
+
 // maintenance mode, direct visitors to call
 define( "DISABLE_SIGNUP",   false );
 
