@@ -63,11 +63,23 @@ foreach( $simple_pages as $route => $template ) {
     });
 }
 
+// ===========================================================================
 // auth needed for admin panel
-$klein->respond("/admin/", function($req, $resp, $svc, $app) use ($template) {
+// ===========================================================================
+function admin_panel($req, $resp, $svc, $app, $template) {
     $auth = new VOA_Auth(); // die if not auth
     $app->smarty->assign("page", "admin");
+    echo "<PRE>"; print_r( $req ); echo "</PRE>";
     return( $app->smarty->fetch( "admin.tpl") );
+}
+
+$klein->respond("/admin/", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_panel($req, $resp, $svc, $app, $template));
+});
+
+// admin / 2015 / 08 /
+$klein->respond("/admin/[i]/[i]/", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_panel($req, $resp, $svc, $app, $template));
 });
 
 // ===========================================================================
