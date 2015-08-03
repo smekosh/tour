@@ -1,6 +1,6 @@
 {capture}
 {$title = "Page not found"}
-{$page = "404"}
+{if !isset($page)}{$page = "404"}{/if}
 {if $page == "index"}
     {$title = "VOA Studio Tour"}
 {elseif $page == "about"}
