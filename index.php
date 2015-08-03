@@ -3,6 +3,7 @@ require( "config.php" );
 require( "vendor/autoload.php" );
 require( "class.calendar.php" );
 require( "class.data.php" );
+require( "class.auth.php" );
 
 if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
@@ -62,11 +63,24 @@ foreach( $simple_pages as $route => $template ) {
     });
 }
 
+// auth needed for admin panel
+$klein->respond("/admin/", function($req, $resp, $svc, $app) use ($template) {
+    $auth = new VOA_Auth(); // die if not auth
+    $app->smarty->assign("page", "admin");
+    return( $app->smarty->fetch( "admin.tpl") );
+});
+
 // ===========================================================================
 // form processor
 // ===========================================================================
 $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use ($template) {
-    #$svc->validateParam("number_of_visitors"
+    $svc->validateParam(
+        "number_of_visitors",
+        "Please select a number between 0 and 20")
+        ->isLen(1,2)
+        ->isChars('0-9')
+    ;
+
     $p = $req->params();
     print_r( $p );
     die;
