@@ -1,4 +1,6 @@
 {capture}
+{$title = "Page not found"}
+{$page = "404"}
 {if $page == "index"}
     {$title = "VOA Studio Tour"}
 {elseif $page == "about"}
