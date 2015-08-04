@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2015 at 08:36 PM
+-- Generation Time: Aug 04, 2015 at 07:06 PM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.16
 
@@ -55,13 +55,15 @@ CREATE TABLE IF NOT EXISTS `infos` (
 CREATE TABLE IF NOT EXISTS `tours` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `visit_day` date NOT NULL,
-  `num_visitors` int(10) unsigned NOT NULL,
+  `num_visitors` int(10) unsigned NOT NULL DEFAULT '0',
   `type_of_tour` enum('Daily','Special') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Daily',
+  `closed` enum('Yes','No') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No',
   PRIMARY KEY (`id`),
   KEY `when` (`visit_day`),
   KEY `num_visitors` (`num_visitors`),
-  KEY `type_of_tour` (`type_of_tour`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+  KEY `type_of_tour` (`type_of_tour`),
+  KEY `closed` (`closed`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=52 ;
 
 -- --------------------------------------------------------
 
