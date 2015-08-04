@@ -51,14 +51,20 @@ $simple_pages = array(
     "/visit/" =>            "form"
 );
 
+$reservation_range = array(
+    "start" => time(),
+    "end" => strtotime("+3 month")
+);
+
 // maintenance mode, set in config
 if( DISABLE_SIGNUP === true ) {
     $simple_pages["/visit/"] = "form-disabled";
 }
 
 foreach( $simple_pages as $route => $template ) {
-    $klein->respond($route, function($req, $resp, $svc, $app) use ($template) {
+    $klein->respond($route, function($req, $resp, $svc, $app) use ($template, $reservation_range) {
         $app->smarty->assign("page", $template);
+        $app->smarty->assign("reservation_range", $reservation_range);
         return( $app->smarty->fetch( "{$template}.tpl" ) );
     });
 }

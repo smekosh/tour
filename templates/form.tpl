@@ -170,9 +170,13 @@ jQuery(function($){
 
     jQuery('#datetimepicker3').datetimepicker({
         onGenerate:function( ct ){
-          $(this).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled');
+            // disable weekends
+            $(this).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled');
         },
-        format:'DD.MM.YYYY',
+        formatDate:'Y-m-d',
+        format:'YYYY-MM-DD',
+        minDate:'{$reservation_range.start|date_format:"Y-m-d"}',
+        maxDate:'{$reservation_range.end|date_format:"Y-m-d"}',
         timepicker:false,
         dayOfWeekStart: 0,
         inline:true,
