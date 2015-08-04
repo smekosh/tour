@@ -51,12 +51,53 @@ $simple_pages = array(
     "/visit/" =>            "form"
 );
 
+// ===========================================================================
+// used to lock down calendar selection
+// ===========================================================================
+function get_available_tours($reservation_range) {
+    $closed = Tours::
+        where("closed", "Yes")
+        ->where("visit_day", ">=", $reservation_range["date_start"] )
+        ->where("visit_day", "<=", $reservation_range["date_end"] )
+        ->get();
+
+    $r = array(
+        "closed" => array(),
+        "reserved" => array()
+    );
+    foreach( $closed as $close ) {
+        $r["closed"][$close->visit_day] = 1;
+    }
+
+    $reserved = Tours::
+        where("closed", "No")
+        ->where("visit_day", ">=", $reservation_range["date_start"] )
+        ->where("visit_day", "<=", $reservation_range["date_end"] )
+        ->get();
+
+    foreach( $reserved as $reserve ) {
+        if( !isset($r["reserved"][$reserve->visit_day]) ) {
+            $r["reserved"][$reserve->visit_day] = 0;
+        }
+
+        $r["reserved"][$reserve->visit_day] += $reserve->num_visitors;
+    }
+
+    return( $r );
+}
+
 $reservation_range = array(
     "start" => time(),
     "end" => strtotime("+3 month")
 );
 
+$reservation_range["date_start"] = date("Y-m-d", $reservation_range["start"] );
+$reservation_range["date_end"] = date("Y-m-d", $reservation_range["end"] );
+$reservation_range["days"] = get_available_tours($reservation_range);
+
+// ===========================================================================
 // maintenance mode, set in config
+// ===========================================================================
 if( DISABLE_SIGNUP === true ) {
     $simple_pages["/visit/"] = "form-disabled";
 }

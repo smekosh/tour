@@ -9,7 +9,7 @@
 {/block}
 
 {block name="jumbotron"}
-
+<pre>{$reservation_range|print_r}</pre>
 <h1>VOA Tour Reservations</h1>
 <p>Tours of the VOA radio and television studios in Washington are available to the public. It's a fascinating look at the largest U.S. international broadcast operation.</p>
 
@@ -58,7 +58,6 @@
 </div>
 
 {/block}
-
 
 {block name="footer"}
 
@@ -145,6 +144,7 @@ Form_Payload.prototype.Recap = function() {
 }
 
 var VOA_form = new Form_Payload();
+var reservation_range = {$reservation_range|json_encode};
 
 jQuery(function($){
 
@@ -168,10 +168,42 @@ jQuery(function($){
         VOA_form.Set("number_of_visitors", ui.value);
     });
 
+    function update_date(cal, day, disable) {
+        var d = day.split("-");
+
+        var selector =
+            ".xdsoft_date" +
+            "[data-year='" + parseInt(d[0]) + "']" +
+            "[data-month='" + (parseInt(d[1])-1) + "']" + // gah, month-1
+            "[data-date='" + parseInt(d[2]) + "']";
+
+        var x = $(cal).find(selector);
+
+        if( disable === true ) {
+            x.addClass("xdsoft_disabled");
+        } else {
+            x.removeClass("xdsoft_disabled");
+        }
+    }
+
     jQuery('#datetimepicker3').datetimepicker({
         onGenerate:function( ct ){
             // disable weekends
             $(this).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled');
+
+            var cal = this;
+
+            for( var k in reservation_range.days.reserved)(function(day, count) {
+                update_date(cal, day, false);
+                if( 20 - count - VOA_form.data.number_of_visitors.value < 0 ) {
+                    update_date(cal, day, true);
+                }
+            })(k, reservation_range.days.reserved[k])
+
+            // blocked-off dates are non-negotiable
+            for( var k in reservation_range.days.closed)(function(day, count) {
+                update_date(cal, day, true);
+            })(k, reservation_range.days.closed[k])
         },
         formatDate:'Y-m-d',
         format:'YYYY-MM-DD',
