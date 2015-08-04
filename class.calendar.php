@@ -35,7 +35,10 @@ class VOA_Calendar {
         # beginning of a month empty days
         $first = $this->start->format("D");
         $offset = $this->week[$first];
-        $days = array_fill(0, $offset, "");
+
+        if( $offset > 0 ) {
+            $days = array_fill(0, $offset, "");
+        }
 
         $temp = clone $this->start;
 
@@ -54,8 +57,11 @@ class VOA_Calendar {
         $week = count($days) - 1;
         $last_week = $days[$week];
         $missing = 7 - count($last_week);
-        $last_week_fill = array_fill(0, $missing, "");
-        $days[$week] = array_merge($last_week, $last_week_fill);
+
+        if( $missing > 0 ) {
+            $last_week_fill = array_fill(0, $missing, "");
+            $days[$week] = array_merge($last_week, $last_week_fill);
+        }
 
         return( $days );
     }
