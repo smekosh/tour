@@ -9,7 +9,7 @@
 {/block}
 
 {block name="jumbotron"}
-<pre>{$reservation_range|print_r}</pre>
+
 <h1>VOA Tour Reservations</h1>
 <p>Tours of the VOA radio and television studios in Washington are available to the public. It's a fascinating look at the largest U.S. international broadcast operation.</p>
 
