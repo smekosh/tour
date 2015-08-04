@@ -164,6 +164,23 @@ function admin_panel($req, $resp, $svc, $app, $template) {
     }
     $app->smarty->assign("closed", $closed_simple);
 
+    // data contains day count_chars
+    $reservations = Tours::
+        where("closed", "No")
+        ->where("visit_day", ">=", "{$req->year}-{$req->month}-01" )
+        ->where("visit_day", "<", "{$next->year}-{$next->month}-01" )
+        ->get();
+
+    $reservation_count = array();
+    foreach( $reservations as $reservation ) {
+        if( !isset($reservation_count[$reservation->visit_day] ) ) {
+            $reservation_count[$reservation->visit_day] = 0;
+        }
+        $reservation_count[$reservation->visit_day] += $reservation->num_visitors;
+    }
+
+    $app->smarty->assign("reservations", $reservation_count);
+
     return( $app->smarty->fetch( "admin.tpl") );
 }
 

@@ -119,8 +119,8 @@ td { height: 7em; width: 14.285% }
     {foreach from=$week item=day}
         <td date="{$day}" class="{if $day|date_format:"D" == "Sun" || $day|date_format:"D" == "Sat" || $day == ""}nyet{/if} {if isset($closed[$day])}closed{/if}">
             <p>{$day|date_format:"%#d"}</p>
-{if isset($reserved[$day])}
-<div class="visitor_count">{$reserved[$day].count}</div>
+{if isset($reservations[$day])}
+<div class="visitor_count">{$reservations[$day]}</div>
 {/if}
 
 {if isset($closed[$day])}
