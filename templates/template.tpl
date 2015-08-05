@@ -61,7 +61,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{$homepage}/">VOA Tour</a>
+                <a class="navbar-brand" href="{$homepage}/"><img src="{$homepage}/img/2015-08_voa-tour-logo_2x.png" width="100" height="20" alt="VOA Tour" /></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
