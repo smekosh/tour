@@ -98,22 +98,31 @@ footer {
     border-top:1px dotted silver;
 }
 
-.carousel-inner .item {
-    height:400px;
-    padding-left:5em;
-    padding-right:5em;
-}
-
+.carousel-control.right, .carousel-control.left { display: none; visibility: hidden; }
 .carousel-indicators { display: none; visibility: hidden; }
 
-.ui-slider-handle { cursor: pointer }
-.carousel-control { width: 10% }
-.carousel-caption { background-color: gray }
 
-.carousel-control.right, .carousel-control.left { background: none }
-.carousel-control.right .glyphicon, .carousel-control.left .glyphicon { color: black }
 
-.xdsoft_disabled {
-    background-color: black !important;
-    opacity:0.6 !important;
+
+
+@media (min-width: 768px) {
+
+	.carousel-inner .item {
+	    min-height:400px;
+	    padding-left:5em;
+	    padding-right:5em;
+	}
+
+	.ui-slider-handle { cursor: pointer }
+	.carousel-control { width: 10% }
+	.carousel-caption { background-color: gray }
+
+	.carousel-control.right, .carousel-control.left { background: none; display: block; visibility: visible; }
+	.carousel-control.right .glyphicon, .carousel-control.left .glyphicon { color: black }
+
+	.xdsoft_disabled {
+	    background-color: black !important;
+	    opacity:0.6 !important;
+	}
+
 }
