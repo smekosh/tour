@@ -225,17 +225,45 @@ $klein->respond("/admin/[i:year]/[i:month]/", function($req, $resp, $svc, $app) 
 // ===========================================================================
 // form processor
 // ===========================================================================
-$klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use ($template) {
+$klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use ($template, $mail) {
+    /*
     $svc->validateParam(
         "number_of_visitors",
         "Please select a number between 0 and 20")
         ->isLen(1,2)
         ->isChars('0-9')
     ;
+    */
+    $app->smarty->assign("reservation", $req->params() );
+    $app->smarty->assign("remote_ip", $_SERVER["REMOTE_ADDR"]);
+    $email_body = $app->smarty->fetch( "email.tpl" );
 
-    $p = $req->params();
-    print_r( $p );
-    die;
+    // saving only the rudimentary data
+    $day = new Tours;
+    $day->visit_day = $req->tour_date;
+    $day->closed = "No";
+    $day->type_of_tour = $req->type_of_tour;
+    $day->num_visitors = $req->number_of_visitors;
+    $day->save();
+
+    // at this point, the data is db-sanitized
+    $day_db = Tours::where("id", $day->id)->get()->first();
+
+    $mail->From = "noreply@voanews.com";
+    $mail->FromName = "VOA Tour Calendar";
+    $mail->addAddress(ADMIN_EMAIL);
+    $mail->isHTML(true);
+    $mail->Subject = "Reservation for {$day_db->visit_day}, {$req->number_of_visitors} visitors ({$_SERVER["REMOTE_ADDR"]})";
+    $mail->Body = $email_body;
+
+    if( !$mail->send() ) {
+        echo "ERROR: message could not be sent. Please contact the VOA tour office.";
+    } else {
+        echo "Thank you, your reservation has been sent.";
+    }
+    return();
+
+#    return( $email_body );
 });
 
 // ===========================================================================
