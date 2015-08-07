@@ -261,7 +261,7 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
     } else {
         echo "Thank you, your reservation has been sent.";
     }
-    return();
+    return;
 
 #    return( $email_body );
 });
