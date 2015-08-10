@@ -256,14 +256,17 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
     $mail->Subject = "Reservation for {$day_db->visit_day}, {$req->number_of_visitors} visitors ({$_SERVER["REMOTE_ADDR"]})";
     $mail->Body = $email_body;
 
-    if( !$mail->send() ) {
-        echo "ERROR: message could not be sent. Please contact the VOA tour office.";
-    } else {
-        echo "Thank you, your reservation has been sent.";
-    }
-    return;
+    $retarr = array();
+    $retarr["status"] = "good"; // until not
 
-#    return( $email_body );
+    if( !$mail->send() ) {
+        $retarr["message"] = "ERROR: message could not be sent. Please contact the VOA tour office.";
+    } else {
+        $retarr["message"] = "Thank you, your reservation has been sent.";
+    }
+
+    echo json_encode($retarr);
+    die;
 });
 
 // ===========================================================================

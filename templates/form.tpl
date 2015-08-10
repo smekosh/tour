@@ -86,7 +86,7 @@
 function Form_Payload() {
     this.data = {
         "number_of_visitors": { label: "Number of visitors", value: 1 },
-        "type_of_tour": { label: "Type of tour", value: null },
+        "type_of_tour": { label: "Type of tour", value: "Daily" },
         "tour_date": { label: "Tour date", value: null },
         "organizer_name": { label: "Organizer's name", value: null },
         "organizer_phone": { label: "Organizer's phone number", value: null },
@@ -113,21 +113,38 @@ Form_Payload.prototype.getJSON = function() {
 }
 
 Form_Payload.prototype.slideChanged = function(id) {
-    if( id == 0 ) $(".left.carousel-control").hide();
-    if( id == 4 ) $(".right.carousel-control").hide();
+    if( id == 0 ) {
+        $(".left.carousel-control").hide();
+        $("li.previous").hide();
+    }
+    if( id == 4 ) {
+        $(".right.carousel-control").hide();
+        $("li.next").hide();
+    }
 
-    if( id >= 1 ) $(".left.carousel-control").show();
-    if( id <= 3 ) $(".right.carousel-control").show();
+    if( id >= 1 ) {
+        $(".left.carousel-control").show();
+        $("li.previous").show();
+    }
+
+    if( id <= 3 ) {
+        $(".right.carousel-control").show();
+        $("li.next").show();
+    }
 }
 
 Form_Payload.prototype.Set = function( key, value, that ) {
-    if( typeof this.data[key].value == "object" ) {
-        // this.data[key].value.push( value );
+
+    if(
+        typeof this.data[key].list != "undefined" &&
+        this.data[key].list != "undefined" === true
+    ) {
         var array_key = $(that).attr("key");
         this.data[key].value[array_key] = value;
     } else {
         this.data[key].value = value;
     }
+
     this.Recap();
 }
 
@@ -177,6 +194,17 @@ jQuery(function($){
         rest: "label"
     }).on( "slide", function( event, ui ) {
         VOA_form.Set("number_of_visitors", ui.value);
+        $("#groupSizeMobile").val(ui.value);
+
+        jQuery('#datetimepicker3').datetimepicker(picker_options);
+    });
+
+    $("#groupSizeMobile").on("change", function() {
+        var value = parseInt($(this).val());
+        VOA_form.Set("number_of_visitors", value );
+        $("#groupSize").slider("value", value );
+
+        jQuery('#datetimepicker3').datetimepicker(picker_options);
     });
 
     function update_date(cal, day, disable) {
@@ -197,24 +225,28 @@ jQuery(function($){
         }
     }
 
-    jQuery('#datetimepicker3').datetimepicker({
-        onGenerate:function( ct ){
-            // disable weekends
-            $(this).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled');
+    function datepicker_generate(that, ct) {
+        // disable weekends
+        $(that).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled');
 
-            var cal = this;
+        var cal = that;
 
-            for( var k in reservation_range.days.reserved)(function(day, count) {
-                update_date(cal, day, false);
-                if( 20 - count - VOA_form.data.number_of_visitors.value < 0 ) {
-                    update_date(cal, day, true);
-                }
-            })(k, reservation_range.days.reserved[k])
-
-            // blocked-off dates are non-negotiable
-            for( var k in reservation_range.days.closed)(function(day, count) {
+        for( var k in reservation_range.days.reserved)(function(day, count) {
+            update_date(cal, day, false);
+            if( 20 - count - VOA_form.data.number_of_visitors.value < 0 ) {
                 update_date(cal, day, true);
-            })(k, reservation_range.days.closed[k])
+            }
+        })(k, reservation_range.days.reserved[k])
+
+        // blocked-off dates are non-negotiable
+        for( var k in reservation_range.days.closed)(function(day, count) {
+            update_date(cal, day, true);
+        })(k, reservation_range.days.closed[k])
+    }
+
+    var picker_options = {
+        onGenerate:function( ct ){
+            datepicker_generate(this, ct);
         },
         formatDate:'Y-m-d',
         format:'YYYY-MM-DD',
@@ -228,24 +260,38 @@ jQuery(function($){
         onSelectDate: function(ct, $input) {
             VOA_form.Set("tour_date", ct.dateFormat('Y-m-d') );
         }
-    });
+    };
 
-    // step 1
-    $(".left.carousel-control").hide();
-    $(".right.carousel-control").hide();
+    jQuery('#datetimepicker3').datetimepicker(picker_options);
+
     $("button.tour_type").click(function() {
         $("button.tour_type").removeClass("btn-success");
         $(this).addClass("btn-success");
-
-        VOA_form.Set("type_of_tour", $(this).attr("data-type"));
+        var value = $(this).attr("data-type");
+        VOA_form.Set("type_of_tour", value);
         $(".right.carousel-control").show();
+
+        if( value === "Daily" ) {
+            $("#tourType1").prop('checked', true)
+        } else {
+            $("#tourType2").prop('checked', true)
+        }
+    });
+
+    $("#tourType1").click(function() {
+        VOA_form.Set("type_of_tour", "Daily");
+        $("button.tour_type:eq(0)").click();
+    });
+
+    $("#tourType2").click(function() {
+        VOA_form.Set("type_of_tour", "Special");
+        $("button.tour_type:eq(1)").click();
     });
 
     $(".carousel").on('slid.bs.carousel', function() {
         var id = parseInt( $("div.item.active").attr("data-id") );
         VOA_form.slideChanged( id );
     });
-
 
     // sm
     $(".previous a").click( function(event) {
@@ -258,8 +304,7 @@ jQuery(function($){
         $(".carousel").carousel('next');
     });
 
-
-
+    // multiples, keyed with data-id
     $(".organizer_info").on("change", function() {
         var k = $(this).attr("data-id");
         var v = $(this).val();
@@ -267,18 +312,57 @@ jQuery(function($){
         VOA_form.Set(k, v, this);
     });
 
+    function status_message(message, good) {
+        if( good === true ) {
+            $("#status_reply")
+                .addClass("bg-success")
+                .removeClass("bg-danger")
+            ;
+        } else {
+            $("#status_reply")
+                .removeClass("bg-success")
+                .addClass("bg-danger")
+            ;
+        }
+        $("#status_reply").html( message );
+    }
+
     $("#send_request").click( function() {
-        //$(this).prop("disabled", true);
+        var that = this;
+
+        status_message("", true);
+        $("li.previous").hide();
+
+        $(that).prop("disabled", true);
         $.ajax({
             url: "{$homepage}/visit/request",
             method: "post",
             dataType: "json",
             data: VOA_form.getJSON(),
-            success: function() {
-                alert( "done" );
+            success: function(data) {
+                status_message( data.message, (data.status === "good" ? true : false) );
+                if( data.status !== "good" ) {
+                    $(that).prop("disabled", false);
+                    $("li.previous").show();
+                } else {
+                    $("li.previous").hide();
+                }
+            },
+            error: function(err) {
+                status_message("Error: unable to send a reservation request.<br/>Please call (202) 203-4990 to arrange a tour.", false);
+                $(that).prop("disabled", false);
+                $("li.previous").show();
             }
         });
     });
+
+    // init state
+    $(".left.carousel-control").hide();
+    $("li.previous").hide();
+    $("button.tour_type:eq(0)").click();
+    // $("li.next").hide();
+    $(".right.carousel-control").hide();
+
 
 });
 

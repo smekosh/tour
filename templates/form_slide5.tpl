@@ -7,6 +7,8 @@
 
     <div id="recap"></div>
 
+    <div id="status_reply"></div>
+
     <div class="btn-group" role="group">
         <button id="send_request" type="button" class="btn btn-default">Send Request</button>
     </div>
