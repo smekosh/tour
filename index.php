@@ -7,6 +7,11 @@ require( "class.auth.php" );
 
 date_default_timezone_set("America/New_York");
 
+// for varnish
+if( isset( $_SERVER['HTTP_X_FORWARDED_FOR']) ) {
+    $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
+}
+
 if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
 // ===========================================================================
