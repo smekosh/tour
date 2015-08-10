@@ -231,12 +231,14 @@ jQuery(function($){
 
         var cal = that;
 
-        for( var k in reservation_range.days.reserved)(function(day, count) {
-            update_date(cal, day, false);
-            if( 20 - count - VOA_form.data.number_of_visitors.value < 0 ) {
-                update_date(cal, day, true);
-            }
-        })(k, reservation_range.days.reserved[k])
+        if( VOA_form.data.type_of_tour.value === "Daily" ) {
+            for( var k in reservation_range.days.reserved)(function(day, count) {
+                update_date(cal, day, false);
+                if( 20 - count - VOA_form.data.number_of_visitors.value < 0 ) {
+                    update_date(cal, day, true);
+                }
+            })(k, reservation_range.days.reserved[k])
+        }
 
         // blocked-off dates are non-negotiable
         for( var k in reservation_range.days.closed)(function(day, count) {
@@ -271,6 +273,9 @@ jQuery(function($){
         VOA_form.Set("type_of_tour", value);
         $(".right.carousel-control").show();
 
+        // update calendar, because different rules apply
+        jQuery('#datetimepicker3').datetimepicker(picker_options);
+
         if( value === "Daily" ) {
             $("#tourType1").prop('checked', true)
         } else {
@@ -281,11 +286,17 @@ jQuery(function($){
     $("#tourType1").click(function() {
         VOA_form.Set("type_of_tour", "Daily");
         $("button.tour_type:eq(0)").click();
+
+        // update calendar, because different rules apply
+        jQuery('#datetimepicker3').datetimepicker(picker_options);
     });
 
     $("#tourType2").click(function() {
         VOA_form.Set("type_of_tour", "Special");
         $("button.tour_type:eq(1)").click();
+
+        // update calendar, because different rules apply
+        jQuery('#datetimepicker3').datetimepicker(picker_options);
     });
 
     $(".carousel").on('slid.bs.carousel', function() {
