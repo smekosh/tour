@@ -102,8 +102,11 @@ footer {
 .carousel-indicators { display: none; visibility: hidden; }
 
 
-
-
+/* calendar - unavailable selection days */
+.xdsoft_disabled {
+    background-color: black !important;
+    opacity:0.6 !important;
+}
 
 @media (min-width: 768px) {
 
@@ -119,10 +122,4 @@ footer {
 
 	.carousel-control.right, .carousel-control.left { background: none; display: block; visibility: visible; }
 	.carousel-control.right .glyphicon, .carousel-control.left .glyphicon { color: black }
-
-	.xdsoft_disabled {
-	    background-color: black !important;
-	    opacity:0.6 !important;
-	}
-
 }
