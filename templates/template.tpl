@@ -13,6 +13,8 @@
     {$title = "Visit | VOA Studio Tour"}
 {elseif $page == "form-disabled"}
     {$title = "Visit | VOA Studio Tour"}
+{elseif $page == "admin"}
+    {$title = "Admin {$current->year}/{$current->month} | VOA Studio Tour"}
 {/if}
 {/capture}
 <!DOCTYPE html>
