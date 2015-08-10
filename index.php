@@ -5,6 +5,8 @@ require( "class.calendar.php" );
 require( "class.data.php" );
 require( "class.auth.php" );
 
+date_default_timezone_set("America/New_York");
+
 if( !defined( "HOMEPAGE") ) die( "Error, config file missing?" );
 
 // ===========================================================================
