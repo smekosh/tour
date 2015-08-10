@@ -12,6 +12,9 @@ define( "ADMIN_EMAIL",      "email@example.com")
 // maintenance mode, direct visitors to call
 define( "DISABLE_SIGNUP",   false );
 
+// in case form is disabled, you can access a /testform/ URL to simulate it
+define( "SECRET_SIGNUP_TEST_FORM",   false );
+
 // development mode, route altered for /subfolder/
 define( "DEVELOPMENT_MODE", false );
 

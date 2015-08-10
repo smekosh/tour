@@ -53,6 +53,11 @@ $simple_pages = array(
     "/visit/" =>            "form"
 );
 
+// for debugging purposes
+if( DISABLE_SIGNUP === true && SECRET_SIGNUP_TEST_FORM === true ) {
+    $simple_pages["/testform/"] = "form";
+}
+
 // ===========================================================================
 // used to lock down calendar selection
 // ===========================================================================
