@@ -1,4 +1,4 @@
-{capture}
+{strip}{capture}
 {$title = "Page not found"}
 {if !isset($page)}{$page = "404"}{/if}
 {if $page == "index"}
@@ -17,6 +17,10 @@
     {$title = "Admin {$current->year}/{$current->month} | VOA Studio Tour"}
 {/if}
 {/capture}
+{capture assign="canonical"}
+    http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}
+{/capture}
+{/strip}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,32 +31,32 @@
 
     <title>{$title}</title>
 
-    <link rel="canonical" href="{$homepage}/{$page}">
+    <link rel="canonical" href="{$canonical}">
     <link rel="image_src" href="{$homepage}/img/voa-tour-share-1200x650.jpg">
-    
+
     <meta name="title" content="{$title}">
     <meta itemprop="description" name="description" content="The Voice of America Studio Tour is a behind-the-scenes look at live radio, TV, and digital broadcasting in the 43 languages we support.">
     <meta name="keywords" content="voice of america, voa, voa studio tour, tours in dc">
-     
+
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Voice of America" />
     <meta property="og:title" content="{$title}" />
     <meta property="og:description" content="The Voice of America Studio Tour is a behind-the-scenes look at live radio, TV, and digital broadcasting in the 43 languages we support." />
-    <meta property="og:url" content="{$homepage}/{$page}" />
+    <meta property="og:url" content="{$canonical}" />
     <meta property="og:image" content="{$homepage}/img/voa-tour-share-1200x650.jpg" />
-     
+
     <meta name="twitter:card" value="summary_large_image">
     <meta name="twitter:site" value="@voanews">
     <meta name="twitter:creator" content="@voanews">
     <meta name="twitter:title" content="{$title}">
     <meta name="twitter:description" content="The Voice of America Studio Tour is a behind-the-scenes look at live radio, TV, and digital broadcasting in the 43 languages we support.">
-    <meta name="twitter:url" content="{$homepage}/{$page}">
+    <meta name="twitter:url" content="{$canonical}">
     <meta name="twitter:image" content="{$homepage}/img/voa-tour-share-1200x650.jpg">
-     
+
     <meta name="DISPLAYDATE" content="August 10, 2015">
     <meta itemprop="dateModified" content="2015-08-10">
     <meta itemprop="datePublished" content="2015-08-10">
-    
+
 
     <!-- Bootstrap core CSS -->
     <link href="{$homepage}/css/bootstrap.min.css" rel="stylesheet">
