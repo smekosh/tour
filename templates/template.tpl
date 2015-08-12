@@ -2,7 +2,7 @@
 {$title = "Page not found"}
 {if !isset($page)}{$page = "404"}{/if}
 {if $page == "index"}
-    {$title = "VOA Studio Tour"}
+    {$title = "Voice of America Studio Tour"}
 {elseif $page == "about"}
     {$title = "About | VOA Studio Tour"}
 {elseif $page == "directions"}
@@ -23,10 +23,36 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="{$homepage}/favicon.ico">
+    <link type="image/x-icon" rel="icon" href="{$homepage}/favicon.ico">
+
     <title>{$title}</title>
+
+    <link rel="canonical" href="{$homepage}/{$page}">
+    <link rel="image_src" href="{$homepage}/img/voa-tour-share-1200x650.jpg">
+    
+    <meta name="title" content="{$title}">
+    <meta itemprop="description" name="description" content="The Voice of America Studio Tour is a behind-the-scenes look at live radio, TV, and digital broadcasting in the 43 languages we support.">
+    <meta name="keywords" content="voice of america, voa, voa studio tour, tours in dc">
+     
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Voice of America" />
+    <meta property="og:title" content="{$title}" />
+    <meta property="og:description" content="The Voice of America Studio Tour is a behind-the-scenes look at live radio, TV, and digital broadcasting in the 43 languages we support." />
+    <meta property="og:url" content="{$homepage}/{$page}" />
+    <meta property="og:image" content="{$homepage}/img/voa-tour-share-1200x650.jpg" />
+     
+    <meta name="twitter:card" value="summary_large_image">
+    <meta name="twitter:site" value="@voanews">
+    <meta name="twitter:creator" content="@voanews">
+    <meta name="twitter:title" content="{$title}">
+    <meta name="twitter:description" content="The Voice of America Studio Tour is a behind-the-scenes look at live radio, TV, and digital broadcasting in the 43 languages we support.">
+    <meta name="twitter:url" content="{$homepage}/{$page}">
+    <meta name="twitter:image" content="{$homepage}/img/voa-tour-share-1200x650.jpg">
+     
+    <meta name="DISPLAYDATE" content="August 10, 2015">
+    <meta itemprop="dateModified" content="2015-08-10">
+    <meta itemprop="datePublished" content="2015-08-10">
+    
 
     <!-- Bootstrap core CSS -->
     <link href="{$homepage}/css/bootstrap.min.css" rel="stylesheet">
@@ -36,9 +62,11 @@
 {block name="head"}
 {/block}
 
+    {*
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!--<script src="{$homepage}../../assets/js/ie-emulation-modes-warning.js"></script>-->
+    *}
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{$homepage}/js/ie10-viewport-bug-workaround.js"></script>
@@ -49,6 +77,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <body>
 
