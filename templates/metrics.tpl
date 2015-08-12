@@ -26,6 +26,7 @@ var utag_data = {
 }
 </script>
 
+{literal}
 
 <script type="text/javascript">
 (function(a,b,c,d){
@@ -45,6 +46,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-W72N2D');</script>
 <!-- End Google Tag Manager -->
+
+{/literal}
 
 {else}
 
