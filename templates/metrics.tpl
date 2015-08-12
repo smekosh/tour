@@ -1,6 +1,4 @@
 
-{if $DEVELOPMENT_MODE === false}
-
 <script type="text/javascript">
 var utag_data = {
     entity:"VOA",
@@ -25,6 +23,8 @@ var utag_data = {
     slug:"{$page}"
 }
 </script>
+
+{if $DEVELOPMENT_MODE === false}
 
 {literal}
 
