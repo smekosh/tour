@@ -39,15 +39,15 @@
     <meta name="keywords" content="voice of america, voa, voa studio tour, tours in dc">
 
     <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Voice of America" />
+    <meta property="og:site_name" content="Inside VOA" />
     <meta property="og:title" content="{$title}" />
     <meta property="og:description" content="The Voice of America Studio Tour is a behind-the-scenes look at live radio, TV, and digital broadcasting in the 43 languages we support." />
     <meta property="og:url" content="{$canonical}" />
     <meta property="og:image" content="{$homepage}/img/voa-tour-share-1200x650.jpg" />
 
     <meta name="twitter:card" value="summary_large_image">
-    <meta name="twitter:site" value="@voanews">
-    <meta name="twitter:creator" content="@voanews">
+    <meta name="twitter:site" value="@VOABuzz">
+    <meta name="twitter:creator" content="@VOABuzz">
     <meta name="twitter:title" content="{$title}">
     <meta name="twitter:description" content="The Voice of America Studio Tour is a behind-the-scenes look at live radio, TV, and digital broadcasting in the 43 languages we support.">
     <meta name="twitter:url" content="{$canonical}">
@@ -121,7 +121,7 @@
 {block name="body"}{/block}
 
         <footer>
-            <p>Return to the <a href="http://www.voanews.com/?source=voatour">Voice of America</a> homepage.</p>
+            <p>Return to the <a href="http://www.insidevoa.com/?source=voatour">Inside VOA</a> homepage.</p>
         </footer>
     </div> <!-- /container -->
 
