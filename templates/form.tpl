@@ -92,7 +92,7 @@ function Form_Payload() {
         "organizer_phone": { label: "Organizer's phone number", value: null },
         "organizer_email": { label: "Organizer's email address", value: null },
         "guests": { label: "Guests", list: true, value: [] },
-        "interests": { label: "Interests", value: null },
+        "interests": { label: "How did you hear about VOA tour", value: null },
         "notes": { label: "Notes", value: null }
     };
 }
@@ -103,12 +103,6 @@ Form_Payload.prototype.getJSON = function() {
         if( v.value == null) v.value = "n/a";
         r[k] = v.value;
     })(k, this.data[k]);
-
-    /*r["guests"] = [];
-    for( var i = 0; i < this.data.number_of_visitors.value; i++ ) {
-        r["guests"].push( $("#other_guests input:eq(" + i + ")"));
-    }*/
-
     return( r );
 }
 
@@ -376,15 +370,6 @@ jQuery(function($){
 
 
 });
-
-
-// Date.parseDate = function( input, format ){
-// 	return moment(input,format).toDate();
-// };
-
-// Date.prototype.dateFormat = function( format ){
-// 	return moment(this).format(format);
-// };
 
 </script>
 
