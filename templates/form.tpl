@@ -19,8 +19,6 @@
 
 
 
-
-
 <div id="carousel-example-generic" class="carousel slide" data-interval="false" data-wrap="false" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -30,6 +28,63 @@
         <li data-target="#carousel-example-generic" data-slide-to="3"></li>
         <li data-target="#carousel-example-generic" data-slide-to="4"></li>
     </ol>
+
+
+   
+        {*<!-- inelegant attempt at a progress bar; aborted nearly to the point of the bootstrap version... remove this when #form-progress-bar is pushed to production
+        <style type="text/css">
+
+        .carousel-progress li {
+            color: #fff;
+            font-weight: bold;
+            list-style: none; 
+            margin: 0 auto 3em auto; 
+            padding: .5em; 
+            text-align: center;
+        }
+
+        
+
+        .carousel-progress li.progress-label { background: #A3CAFF; color: #333; font-weight: normal; }
+
+
+        .carousel-progress li.active.progress-start { background: #8AB1EE; }
+        .carousel-progress li.progress-calendar { background: #7097D4; }
+        .carousel-progress li.progress-people { background: #577EBB; }
+        .carousel-progress li.progress-notes { background: #3D64A1; }
+        .carousel-progress li.progress-review { background: #244B88; }
+
+
+        .carousel-progress li.active { background: #5CB85C; }
+        </style>
+        <div class="row">
+        <ol class="carousel-progress col-xs-12 col-md-12">
+            <li class="hidden-xs col-md-1"></li>
+            <li data-target="#start" data-slide-to="0" class="col-xs-2 col-md-2 progress-start active">Part 1</li>
+            <li data-target="#calendar" data-slide-to="1" class="col-xs-2 col-md-2 progress-calendar">Part 2</li>
+            <li data-target="#people" data-slide-to="2" class="col-xs-2 col-md-2 progress-people">Part 3</li>
+            <li data-target="#notes" data-slide-to="3" class="col-xs-2 col-md-2 progress-notes">Part 4</li>
+            <li data-target="#review" data-slide-to="4" class="col-xs-4 col-md-2 progress-review">Review</li>
+            <li class="hidden-xs col-md-1"></li>
+        </ol>
+        </div>
+        --> *}
+
+
+
+    <div class="row" id="form-progress-bar">
+        <div class="col-xs-12">
+            <div class="progress">
+                <div data-target="#start" data-slide-to="0" class="progress-bar progress-bar-start progress-bar-complete" style="width: 20%">Start</div>
+                <div data-target="#calendar" data-slide-to="1" class="progress-bar progress-bar-calendar progress-bar-complete" style="width: 20%">Step 2</div>
+                <div data-target="#people" data-slide-to="2" class="progress-bar progress-bar-people progress-bar-complete" style="width: 20%">Step 3</div>
+                <div data-target="#notes" data-slide-to="3" class="progress-bar progress-bar-notes progress-bar-current" style="width: 20%">Step 4</div>
+                <div data-target="#review" data-slide-to="4" class="progress-bar progress-bar-review" style="width: 20%">Review</div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">

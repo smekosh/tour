@@ -108,6 +108,21 @@ footer {
     opacity:0.6 !important;
 }
 
+
+/* sm addition for form progress */
+#form-progress-bar { margin-bottom: 2em; }
+
+.progress-bar                                { background-color: #ddd; }
+.progress-bar-start.progress-bar-complete    { background-color: #8AB1EE; }
+.progress-bar-calendar.progress-bar-complete { background-color: #7097D4; }
+.progress-bar-people.progress-bar-complete   { background-color: #577EBB; }
+.progress-bar-notes.progress-bar-complete    { background-color: #3D64A1; }
+.progress-bar-review.progress-bar-complete   { background-color: #244B88; }
+.progress-bar-current                        { background-color: #5CB85C; }
+
+
+
+
 @media (min-width: 768px) {
 
 	.carousel-inner .item {
