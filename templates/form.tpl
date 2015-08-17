@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="{$homepage}/css/jquery.datetimepicker.css" />
-<link rel="stylesheet" type="text/css" href="{$homepage}/css/jquery-ui-slider-pips.css">
 
 {/block}
 
@@ -30,20 +29,20 @@
     </ol>
 
 
-   
+
         {*<!-- inelegant attempt at a progress bar; aborted nearly to the point of the bootstrap version... remove this when #form-progress-bar is pushed to production
         <style type="text/css">
 
         .carousel-progress li {
             color: #fff;
             font-weight: bold;
-            list-style: none; 
-            margin: 0 auto 3em auto; 
-            padding: .5em; 
+            list-style: none;
+            margin: 0 auto 3em auto;
+            padding: .5em;
             text-align: center;
         }
 
-        
+
 
         .carousel-progress li.progress-label { background: #A3CAFF; color: #333; font-weight: normal; }
 
@@ -75,10 +74,10 @@
     <div class="row" id="form-progress-bar">
         <div class="col-xs-12">
             <div class="progress">
-                <div data-target="#start" data-slide-to="0" class="progress-bar progress-bar-start progress-bar-complete" style="width: 20%">Start</div>
-                <div data-target="#calendar" data-slide-to="1" class="progress-bar progress-bar-calendar progress-bar-complete" style="width: 20%">Step 2</div>
-                <div data-target="#people" data-slide-to="2" class="progress-bar progress-bar-people progress-bar-complete" style="width: 20%">Step 3</div>
-                <div data-target="#notes" data-slide-to="3" class="progress-bar progress-bar-notes progress-bar-current" style="width: 20%">Step 4</div>
+                <div data-target="#start" data-slide-to="0" class="progress-bar progress-bar-start progress-bar-current" style="width: 20%">Start</div>
+                <div data-target="#calendar" data-slide-to="1" class="progress-bar progress-bar-calendar " style="width: 20%">Step 2</div>
+                <div data-target="#people" data-slide-to="2" class="progress-bar progress-bar-people " style="width: 20%">Step 3</div>
+                <div data-target="#notes" data-slide-to="3" class="progress-bar progress-bar-notes " style="width: 20%">Step 4</div>
                 <div data-target="#review" data-slide-to="4" class="progress-bar progress-bar-review" style="width: 20%">Review</div>
             </div>
         </div>
@@ -104,19 +103,9 @@
             {include file="form_slide5.tpl"}
         </div>
     </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control hidden-xs" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control hidden-xs" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div>
 
-<nav class="visible-xs-block">
+<nav class="">
   <ul class="pager">
     <li class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Go Back</a></li>
     <li class="next"><a href="#">Next <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
@@ -134,7 +123,6 @@
 <script src="{$homepage}/js/bootstrap.min.js"></script>
 <script src="{$homepage}/js/moment.min.js"></script>
 <script src="{$homepage}/js/jquery.datetimepicker.js"></script>
-<script src="{$homepage}/js/jquery-ui-slider-pips.min.js"></script>
 
 <script type="text/javascript">
 
@@ -163,23 +151,23 @@ Form_Payload.prototype.getJSON = function() {
 
 Form_Payload.prototype.slideChanged = function(id) {
     if( id == 0 ) {
-        $(".left.carousel-control").hide();
         $("li.previous").hide();
     }
     if( id == 4 ) {
-        $(".right.carousel-control").hide();
         $("li.next").hide();
     }
 
     if( id >= 1 ) {
-        $(".left.carousel-control").show();
         $("li.previous").show();
     }
 
     if( id <= 3 ) {
-        $(".right.carousel-control").show();
         $("li.next").show();
     }
+
+    $("#form-progress-bar .progress-bar").removeClass("progress-bar-complete progress-bar-current");
+    $("#form-progress-bar .progress-bar").slice(0,id).addClass("progress-bar-complete");
+    $("#form-progress-bar .progress-bar:eq(" + id + ")").addClass("progress-bar-current");
 }
 
 Form_Payload.prototype.Set = function( key, value, that ) {
@@ -198,11 +186,17 @@ Form_Payload.prototype.Set = function( key, value, that ) {
 }
 
 Form_Payload.prototype.resize_other_guests = function() {
-    var requested = this.data["number_of_visitors"].value - 2;
-    var count = $("#other_guests input").length;
+    var requested = this.data["number_of_visitors"].value; // 1
+    var count = $("#other_guests input").length; // 19
 
-    $("#other_guests .input-group").show();
-    $("#other_guests .input-group:gt(" + parseInt(requested) + ")").hide();
+    $("#other_guests .input-group").hide();
+    $("#other_guests .input-group").slice(0,requested-1).show();
+
+    if( requested === 1 ) {
+        $("#full_legal_names").hide();
+    } else {
+        $("#full_legal_names").show();
+    }
 }
 
 Form_Payload.prototype.Recap = function() {
@@ -238,20 +232,9 @@ jQuery(function($){
         $(this).attr("key", k);
     });
 
-    $("#groupSize").slider({ min: 1, max: 20, range: false });
-    $("#groupSize").slider("pips" , {
-        rest: "label"
-    }).on( "slide", function( event, ui ) {
-        VOA_form.Set("number_of_visitors", ui.value);
-        $("#groupSizeMobile").val(ui.value);
-
-        jQuery('#datetimepicker3').datetimepicker(picker_options);
-    });
-
     $("#groupSizeMobile").on("change", function() {
         var value = parseInt($(this).val());
         VOA_form.Set("number_of_visitors", value );
-        $("#groupSize").slider("value", value );
 
         jQuery('#datetimepicker3').datetimepicker(picker_options);
     });
@@ -315,26 +298,8 @@ jQuery(function($){
 
     jQuery('#datetimepicker3').datetimepicker(picker_options);
 
-    $("button.tour_type").click(function() {
-        $("button.tour_type").removeClass("btn-success");
-        $(this).addClass("btn-success");
-        var value = $(this).attr("data-type");
-        VOA_form.Set("type_of_tour", value);
-        $(".right.carousel-control").show();
-
-        // update calendar, because different rules apply
-        jQuery('#datetimepicker3').datetimepicker(picker_options);
-
-        if( value === "Daily" ) {
-            $("#tourType1").prop('checked', true)
-        } else {
-            $("#tourType2").prop('checked', true)
-        }
-    });
-
     $("#tourType1").click(function() {
         VOA_form.Set("type_of_tour", "Daily");
-        $("button.tour_type:eq(0)").click();
 
         // update calendar, because different rules apply
         jQuery('#datetimepicker3').datetimepicker(picker_options);
@@ -342,7 +307,6 @@ jQuery(function($){
 
     $("#tourType2").click(function() {
         VOA_form.Set("type_of_tour", "Special");
-        $("button.tour_type:eq(1)").click();
 
         // update calendar, because different rules apply
         jQuery('#datetimepicker3').datetimepicker(picker_options);
@@ -417,11 +381,10 @@ jQuery(function($){
     });
 
     // init state
-    $(".left.carousel-control").hide();
     $("li.previous").hide();
-    $("button.tour_type:eq(0)").click();
+    VOA_form.Set("number_of_visitors", 1 );
+
     // $("li.next").hide();
-    $(".right.carousel-control").hide();
 
 
 });
