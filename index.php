@@ -197,6 +197,7 @@ function admin_panel($req, $resp, $svc, $app, $template) {
 }
 
 $klein->respond("POST", "/admin/update", function($req, $resp, $svc, $app) use ($template) {
+    $auth = new VOA_Auth(); // die if not auth
     $r = array("id" => array(), "rand" => rand(), "visit_day" => $req->day );
 
     if( $req->closed === "yes" ) {
