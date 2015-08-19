@@ -7,7 +7,7 @@ define( "APP_PATH",         "/" );
 // rudimentary control, allows for number adjustments and calendar block-offs
 define( "ADMIN_USERNAME",   "admin-username" );
 define( "ADMIN_PASSWORD",   "enter-password-here" );
-define( "ADMIN_EMAIL",      "email@example.com")
+define( "ADMIN_EMAIL",      "email@example.com" );
 
 // maintenance mode, direct visitors to call
 define( "DISABLE_SIGNUP",   false );
