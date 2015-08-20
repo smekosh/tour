@@ -252,14 +252,16 @@ jQuery(function($){
 
         if( disable === true ) {
             x.addClass("xdsoft_disabled");
+            x.prop("title", "Day unavailable");
         } else {
             x.removeClass("xdsoft_disabled");
+            x.removeProp("title");
         }
     }
 
     function datepicker_generate(that, ct) {
         // disable weekends
-        $(that).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled');
+        $(that).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled').prop("title", "Day unavailable");
 
         var cal = that;
 
