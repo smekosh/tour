@@ -17,6 +17,10 @@
 {/foreach}
         </ol>
     </li>
+{if $reservation.type_of_tour == "Daily"}
+    <li>How did you hear about the VOA tour: {$reservation.interests}</li>
+{else}
     <li>Interests: {$reservation.interests}</li>
+{/if}
     <li>Notes: {$reservation.notes}</li>
 </ul>

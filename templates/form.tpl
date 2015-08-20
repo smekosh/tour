@@ -305,6 +305,8 @@ jQuery(function($){
 
         // update calendar, because different rules apply
         jQuery('#datetimepicker3').datetimepicker(picker_options);
+
+        $("#question_4_1").html("How did you hear about the VOA tour?");
     });
 
     $("#tourType2").click(function() {
@@ -312,6 +314,8 @@ jQuery(function($){
 
         // update calendar, because different rules apply
         jQuery('#datetimepicker3').datetimepicker(picker_options);
+
+        $("#question_4_1").html("Any particular interests?");
     });
 
     $(".carousel").on('slid.bs.carousel', function() {
