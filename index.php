@@ -266,7 +266,12 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
     $mail->FromName = "VOA Tour Calendar";
     $mail->addAddress(ADMIN_EMAIL);
     $mail->isHTML(true);
-    $mail->Subject = "Reservation for {$day_db->visit_day}, {$req->number_of_visitors} visitors ({$_SERVER["REMOTE_ADDR"]})";
+
+    if( $req->type_of_tour === "Daily" ) {
+        $mail->Subject = "Daily Reservation {$day_db->visit_day}, {$req->number_of_visitors} visitors ({$_SERVER["REMOTE_ADDR"]})";
+    } else {
+        $mail->Subject = "Special Reservation {$day_db->visit_day}, {$req->number_of_visitors} visitors ({$_SERVER["REMOTE_ADDR"]})";
+    }
     $mail->Body = $email_body;
 
     $retarr = array();
