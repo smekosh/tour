@@ -23,7 +23,7 @@
 		    <li>Admission: Free</li>
 		    <li>Each tour lasts 30-40 minutes. </li>
 		    <li>The tour is conducted in English only. </li>
-		    <li>Tour is recommended for children age 8 and above. </li>
+		    <li>Tour is recommended for children age 16 and above. </li>
 		</ul>
 
 		
