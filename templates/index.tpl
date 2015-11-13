@@ -14,7 +14,7 @@
     <div class="col-md-4">
         <h2><a href="{$homepage}/about/">About the Tour</a></h2>
         <p><a href="{$homepage}/about/" class="teaser-img about-teaser"></a></p>
-        <p>The Voice of America Studio Tour is a behind-the-scenes look at live broadcasting in radio, television, and the Internet in several of our 46 languages. Tours are guided with audio and video features, and last 45 minutes. </p>
+        <p>The Voice of America Studio Tour is a behind-the-scenes look at live broadcasting in radio, television, and the Internet in several of our 45 languages. Tours last 45 minutes. </p>
         <p><a class="btn btn-default" href="{$homepage}/about/" role="button">View details &raquo;</a></p>
     </div>
     <div class="col-md-4">
