@@ -130,7 +130,7 @@ function Form_Payload() {
     this.data = {
         "number_of_visitors": { label: "Number of visitors", value: 1 },
         "type_of_tour": { label: "Type of tour", value: "Daily" },
-        "tour_date": { label: "Tour date", value: null },
+        "tour_date": { label: "Tour date", value: "{$smarty.now|date_format:'Y-m-d'}" },
         "organizer_name": { label: "Organizer's name", value: null },
         "organizer_phone": { label: "Organizer's phone number", value: null },
         "organizer_email": { label: "Organizer's email address", value: null },
