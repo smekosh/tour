@@ -130,7 +130,7 @@ function Form_Payload() {
     this.data = {
         "number_of_visitors": { label: "Number of visitors", value: 1 },
         "type_of_tour": { label: "Type of tour", value: "Daily" },
-        "tour_date": { label: "Tour date", value: "{$smarty.now|date_format:'Y-m-d'}" },
+        "tour_date": { label: "Tour date", value: null },
         "organizer_name": { label: "Organizer's name", value: null },
         "organizer_phone": { label: "Organizer's phone number", value: null },
         "organizer_email": { label: "Organizer's email address", value: null },
@@ -153,6 +153,7 @@ Form_Payload.prototype.slideChanged = function(id) {
     if( id == 0 ) {
         $("li.previous").hide();
     }
+
     if( id == 4 ) {
         $("li.next").hide();
     }
@@ -163,6 +164,15 @@ Form_Payload.prototype.slideChanged = function(id) {
 
     if( id <= 3 ) {
         $("li.next").show();
+    }
+
+    // required: must pick an available date before proceeding
+    if( id == 1 ) {
+        if( this.data.tour_date.value === "n/a" ) {
+            $("li.next").hide();
+        } else {
+            $("li.next").show();
+        }
     }
 
     $("#form-progress-bar .progress-bar").removeClass("progress-bar-complete progress-bar-current");
@@ -181,6 +191,10 @@ Form_Payload.prototype.Set = function( key, value, that ) {
     } else {
         this.data[key].value = value;
     }
+
+    // user can only select a date on step '1'
+    // if they do, enable 'next' button
+    $("li.next").show();
 
     this.Recap();
 }

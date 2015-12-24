@@ -5,6 +5,8 @@
 
     <input id="datetimepicker3" type="text"/>
 
+    <p>Please select an available date.</p>
+
 </div>
 
 {*<!--
