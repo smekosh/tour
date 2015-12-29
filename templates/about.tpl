@@ -16,7 +16,7 @@
 
 		<p>The Voice of America Studio Tour offers a firsthand look at VOA’s live news and information programming that is broadcast to an international audience in 45 languages on radio, television, and the Internet.</p>
 
-		
+
 		<h3>Daily Tours</h3>
 		<ul>
 		    <li>Daily public tours are offered Monday through Friday at 12:00 p.m. (except Federal holidays). The doors open 10 minutes before the scheduled tour time.</li>
@@ -26,9 +26,9 @@
 		    <li>Tour is recommended for children age 16 and above. </li>
 		</ul>
 
-		
+
 		<h3>Commercial Tour Companies</h3>
-		<p>To find out how to include VOA in your tour route, please call <a href="tel:+12022034990">(202) 203-4990</a> or e-mail us (<a href="mailto:tickets@voanews.com">tickets@voanews.com</a>).</p>
+		<p>To find out how to include VOA in your tour route, please call <a href="tel:+12022034990">(202) 203-4990</a>.</p>
 
 
 		<h3>Reservations</h3>
