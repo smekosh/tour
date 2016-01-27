@@ -138,3 +138,14 @@ footer {
 
 	.carousel-control.right, .carousel-control.left { background: none; display: block; visibility: visible; }
 	.carousel-control.right .glyphicon, .carousel-control.left .glyphicon { color: black }
+
+.required {
+    font-size: 0.75em;
+    color: crimson;
+    float: right;
+}
+
+#status_reply {
+    margin: 0.5em;
+    padding: 0.5em;
+}

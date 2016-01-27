@@ -5,12 +5,6 @@
 
     <input id="datetimepicker3" type="text"/>
 
-    <p>Please select an available date.</p>
+    <p>Please select an available date and then click next.</p>
 
 </div>
-
-{*<!--
-
-    (option b: day AND time) (9-4)
-
--->*}
