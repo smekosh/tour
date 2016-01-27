@@ -236,6 +236,15 @@ $klein->respond("/admin/[i:year]/[i:month]/", function($req, $resp, $svc, $app) 
 });
 
 // ===========================================================================
+// form validator errors
+// ===========================================================================
+$klein->onError(function($klein, $err_msg) {
+    $retarr = array("status" => "bad", "message" => $err_msg);
+    echo json_encode($retarr);
+    die;
+});
+
+// ===========================================================================
 // form processor
 // ===========================================================================
 $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use ($template, $mail) {
@@ -247,6 +256,22 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
         ->isChars('0-9')
     ;
     */
+
+    $svc->validateParam(
+        "organizer_name",
+        "Error: Please enter the organizer's <strong>name</strong>."
+    )->isLen(5, 100);
+
+    $svc->validateParam(
+        "organizer_phone",
+        "Error: Please enter the organizer's full <strong>phone number</strong> with an area code.<br/>VOA studio tour staff may need to contact you about the scheduled tour."
+    )->isLen(10, 100);
+
+    $svc->validateParam(
+        "organizer_email",
+        "Error: Please enter the organizer's valid <strong>Email address</strong>. VOA studio tour staff may need to contact you about the scheduled tour."
+    )->isEmail();
+
     $app->smarty->assign("reservation", $req->params() );
     $app->smarty->assign("remote_ip", $_SERVER["REMOTE_ADDR"]);
     $email_body = $app->smarty->fetch( "email.tpl" );
@@ -278,7 +303,7 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
     $retarr["status"] = "good"; // until not
 
     if( !$mail->send() ) {
-        $retarr["message"] = "ERROR: message could not be sent. Please contact the VOA tour office.";
+        $retarr["message"] = "ERROR: message could not be sent . Please contact the VOA tour office.";
     } else {
         $retarr["message"] = "Thank you, your reservation has been sent.";
     }

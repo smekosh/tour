@@ -178,6 +178,9 @@ Form_Payload.prototype.slideChanged = function(id) {
     $("#form-progress-bar .progress-bar").removeClass("progress-bar-complete progress-bar-current");
     $("#form-progress-bar .progress-bar").slice(0,id).addClass("progress-bar-complete");
     $("#form-progress-bar .progress-bar:eq(" + id + ")").addClass("progress-bar-current");
+
+    // reset any validation error messages
+    $("#status_reply").removeClass("bg-success bg-danger").html("");
 }
 
 Form_Payload.prototype.Set = function( key, value, that ) {
