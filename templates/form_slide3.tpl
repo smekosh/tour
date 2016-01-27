@@ -1,6 +1,6 @@
 <div class="col-sm-12">
 
-    <h4>Organizer's name <span class="required">* Required field</span></h4>
+    <h4>Organizer's full name <span class="required">* Required field</span></h4>
     <input type="text" class="form-control organizer_info" autocomplete="off" data-id="organizer_name" />
 
     <h4>Organizer's phone number <span class="required">* Required field</span></h4>

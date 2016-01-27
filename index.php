@@ -259,17 +259,19 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
 
     $svc->validateParam(
         "organizer_name",
-        "Error: Please enter the organizer's <strong>name</strong>."
+        "Error: Please enter the organizer's <strong>full name</strong>."
     )->isLen(5, 100);
 
     $svc->validateParam(
         "organizer_phone",
-        "Error: Please enter the organizer's full <strong>phone number</strong> with an area code.<br/>VOA studio tour staff may need to contact you about the scheduled tour."
+        "Error: Please enter the organizer's full <strong>phone number</strong> with an area code." .
+        "<br/>VOA studio tour staff may need to contact you about the scheduled tour."
     )->isLen(10, 100);
 
     $svc->validateParam(
         "organizer_email",
-        "Error: Please enter the organizer's valid <strong>Email address</strong>. VOA studio tour staff may need to contact you about the scheduled tour."
+        "Error: Please enter the organizer's valid <strong>Email address</strong>." .
+        "<br/>VOA studio tour staff may need to contact you about the scheduled tour."
     )->isEmail();
 
     $app->smarty->assign("reservation", $req->params() );
