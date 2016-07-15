@@ -141,9 +141,10 @@ function admin_panel_ym($year, $month = null) {
     return( $r );
 }
 
-function admin_panel($req, $resp, $svc, $app, $template) {
-    $auth = new VOA_Auth(); // die if not auth
-    $app->smarty->assign("page", "admin");
+// ===========================================================================
+// data structure reused by both admin / report screens
+// ===========================================================================
+function admin_panel_data($req, $resp, $svc, $app, $template) {
 
     // implied parameters, but not optional
     if( is_null($req->year) ) $req->year = date("Y");
@@ -153,14 +154,10 @@ function admin_panel($req, $resp, $svc, $app, $template) {
     $ts = strtotime("{$req->year}-{$req->month}-01");
     $prev = admin_panel_ym(strtotime("-1 month", $ts));
     $next = admin_panel_ym(strtotime("+1 month", $ts));
-    $app->smarty->assign("current", admin_panel_ym($req->year, $req->month) );
-    $app->smarty->assign("next", $next );
-    $app->smarty->assign("prev", $prev );
 
     // data only contains month's shape
     $calendar_data = new VOA_calendar($req->year, $req->month);
     $calendar = $calendar_data->getMonth();
-    $app->smarty->assign("calendar", $calendar);
 
     // data contains closed days
     $closed = Tours::
@@ -174,7 +171,6 @@ function admin_panel($req, $resp, $svc, $app, $template) {
     foreach( $closed as $day ) {
         $closed_simple[$day->visit_day] = 1;
     }
-    $app->smarty->assign("closed", $closed_simple);
 
     // data contains day count_chars
     $reservations = Tours::
@@ -191,7 +187,26 @@ function admin_panel($req, $resp, $svc, $app, $template) {
         $reservation_count[$reservation->visit_day] += $reservation->num_visitors;
     }
 
-    $app->smarty->assign("reservations", $reservation_count);
+    return( array(
+        "current" => admin_panel_ym($req->year, $req->month),
+        "next" => $next,
+        "prev" => $prev,
+        "calendar" => $calendar,
+        "closed" => $closed_simple,
+        "reservations" => $reservation_count
+    ));
+}
+
+function admin_panel($req, $resp, $svc, $app, $template) {
+    $auth = new VOA_Auth(); // die if not auth
+    $app->smarty->assign("page", "admin");
+
+    $data = admin_panel_data($req, $resp, $svc, $app, $template);
+
+    // all assignments at once
+    foreach( $data as $k => $v ) {
+        $app->smarty->assign( $k, $v );
+    }
 
     return( $app->smarty->fetch( "admin.tpl") );
 }
