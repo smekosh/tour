@@ -3,6 +3,8 @@
 {block name="footer"}
 <script>
 
+var days = {$reservations|json_encode};
+
 $("td").not(".nyet").mouseover(function() {
     $(this).addClass("mout");
 }).mouseout(function() {
@@ -95,7 +97,35 @@ $("#modal_open_close_day_opened_closed_save_button").click(function(e) {
             buttons_disabled(false);
         }
     })
+});
 
+$(".modal-trigger-details").click( function(e) {
+    e.preventDefault();
+
+    var day = $(this).attr("day");
+    var data = days[day];
+
+    var html = "<table class='details' border='1'>";
+    html += "<thead><tr><th>Reservation #</th><th>Daily</th><th>Special</th></tr></thead><tbody>";
+
+    for( var i = 0; i < data.Details.length; i++ )(function(row, i) {
+        html += "<tr><td class='details_num'><span>" + (i + 1) + "</span></td>";
+        if( row.type_of_tour === "Daily" ) {
+            html += "<td class='details_daily'>" + row.num_visitors + "</td><td></td>";
+        } else {
+            html += "<td></td><td class='details_special'>" + row.num_visitors + "</td>";
+        }
+        html += "</tr>";
+    })(data.Details[i], i);
+    html += "<tr><td class='total_cl'>Total:</td>";
+    html += "<td class='total_cl'>" + data.Daily + "</td>";
+    html += "<td class='total_cl'>" + data.Special + "</td>";
+    html += "</tbody></table>";
+
+    html += "<h4>Total Individuals: " + data.Total + "<h4>";
+    $("#modal_details_body").html(html);
+    $("#modal_details_day").html(day);
+    $("#modal_details").modal("show");
 });
 
 </script>
@@ -103,15 +133,14 @@ $("#modal_open_close_day_opened_closed_save_button").click(function(e) {
 
 {block name="head"}
 {include file="admin-css.tpl"}
+{*<!--
+<link rel="prefetch" href="{$homepage}/admin/{$prev->year}/{$prev->month}/" />
+<link rel="prefetch" href="{$homepage}/admin/{$next->year}/{$next->month}/" />
+-->*}
 {/block}
 
 {block name="jumbotron"}
-
-<h1><a href="{$homepage}/admin/" title="Go to this month">Admin Panel</a></h1>
-<p>
-    <a role="button" class="btn btn-primary btn-lg" href="{$homepage}/admin/">Today</a>
-    <a role="button" class="btn btn-primary btn-lg" href="{$homepage}/admin/report/">Report</a>
-</p>
+{include file="admin-menu.tpl"}
 {/block}
 
 {block name="body"}
@@ -124,45 +153,60 @@ $("#modal_open_close_day_opened_closed_save_button").click(function(e) {
 </h1>
 
 <div class="table">
-<table class="table table-bordered">
+<table class="table table-bordered reservation-calendar">
     <thead>
-        <th>Sun</th>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
+        <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+        </tr>
     </thead>
 
     <tbody>
 {foreach from=$calendar item=week}
-<tr>
+        <tr>
     {foreach from=$week item=day}
-        <td id="id_{$day|md5}" date="{$day}" class="tdcell {if $day|date_format:"D" == "Sun" || $day|date_format:"D" == "Sat" || $day == ""}nyet{/if} {if isset($closed[$day])}closed{/if}">
-            <div class="cell-liner">
-                <div class="mousemenu">
+            <td id="id_{$day|md5}" date="{$day}" class="tdcell {if $day|date_format:"D" == "Sun" || $day|date_format:"D" == "Sat" || $day == ""}nyet{/if} {if isset($closed[$day])}closed{/if} {if $day@last}last-right{/if}  {if $week@last}last-bottom{/if} {if !isset($reservations[$day])}empty{else}full{/if}">
+                <div class="cell-liner">
+{if $day}
+                    <div class="calendar-day">
+                        <span class="calendar-day-label">{$day|date_format:"%#d"}</span>
 {if isset($closed[$day])}
-                    <a class="modal-trigger-openclose" cell-id="id_{$day|md5}" href="#">Open Day?</a>
-{else}
-                    <a class="modal-trigger-openclose" cell-id="id_{$day|md5}" href="#">Close Day?</a>
+                        <span class="tour_closed_notice">Tour closed</span>
 {/if}
-                </div>
+                        <div class="clearfix"></div>
+                    </div>
+{/if}
 
-                <p>{$day|date_format:"%#d"}</p>
 {if isset($reservations[$day])}
-                <div class="visitor_count">{$reservations[$day]}</div>
+                    <ul class="visitor_count_breakdowns" >
+                        <li>Daily: {$reservations[$day].Daily}</li>
+                        <li>Special: {$reservations[$day].Special}</li>
+                        <li class="total">Total: {$reservations[$day].Total}</li>
+                    </ul>
 {/if}
+                    <div class="clearfix"></div>
 
-{if isset($closed[$day])}
-                <div class="tour_closed_notice">Tour closed</div>
+                    <div class="mousemenu">
+{if isset($reservations[$day])}
+    <a class="modal-trigger-details" day="{$day}" href="#">Details</a>
 {/if}
-            </div>
-        </td>
+{if isset($closed[$day])}
+    <a class="modal-trigger-openclose" cell-id="id_{$day|md5}" href="#">Open Day?</a>
+{else}
+    <a class="modal-trigger-openclose" cell-id="id_{$day|md5}" href="#">Close Day?</a>
+{/if}
+                    </div>
+                </div>
+            </td>
     {/foreach}
-</tr>
+        </tr>
 {/foreach}
-</tbody>
+    </tbody>
 </table>
 
 </div>
@@ -192,6 +236,22 @@ $("#modal_open_close_day_opened_closed_save_button").click(function(e) {
             <div class="modal-footer">
                 <button id="modal_open_close_day_opened_closed_cancel_button" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button id="modal_open_close_day_opened_closed_save_button" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="modal_details">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Details for <span id="modal_details_day"></span></h4>
+            </div>
+            <div class="modal-body" id="modal_details_body">
+            </div>
+            <div class="modal-footer">
+                <button id="modal_details_close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

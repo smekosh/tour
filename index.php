@@ -182,9 +182,29 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     $reservation_count = array();
     foreach( $reservations as $reservation ) {
         if( !isset($reservation_count[$reservation->visit_day] ) ) {
-            $reservation_count[$reservation->visit_day] = 0;
+            $reservation_count[$reservation->visit_day] = array(
+                "Total" => 0,
+                "Daily" => 0,
+                "Daily_Groups" => 0,
+                "Special" => 0,
+                "Special_Groups" => 0,
+                "Details" => []
+            );
         }
-        $reservation_count[$reservation->visit_day] += $reservation->num_visitors;
+        $reservation_count[$reservation->visit_day]["Total"] += $reservation->num_visitors;
+        $reservation_count[$reservation->visit_day][$reservation->type_of_tour] += $reservation->num_visitors;
+
+        $reservation_count[$reservation->visit_day]["Details"][] = array(
+            "num_visitors" => $reservation->num_visitors,
+            "type_of_tour" => $reservation->type_of_tour
+        );
+
+        if( $reservation->type_of_tour === "Daily" ) {
+            $reservation_count[$reservation->visit_day]["Daily_Groups"]++;
+        }
+        if( $reservation->type_of_tour === "Special" ) {
+            $reservation_count[$reservation->visit_day]["Special_Groups"]++;
+        }
     }
 
     return( array(
@@ -195,6 +215,41 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
         "closed" => $closed_simple,
         "reservations" => $reservation_count
     ));
+}
+
+function admin_report_panel($req, $resp, $svc, $app, $template) {
+    $auth = new VOA_Auth(); // die if not auth
+    $app->smarty->assign("page", "report");
+
+    $data = admin_panel_data($req, $resp, $svc, $app, $template);
+
+    // all assignments at once
+    foreach( $data as $k => $v ) {
+        $app->smarty->assign( $k, $v );
+    }
+
+    // monthly total
+    $all = array(
+        "Total" => 0,
+        "Daily" => 0,
+        "Daily_Groups" => 0,
+        "Special" => 0,
+        "Special_Groups" => 0
+    );
+
+    foreach( $data["reservations"] as $day => $counts ) {
+
+        // not needed here, also not a number
+        unset( $counts["Details"] );
+
+        foreach( $counts as $k => $v ) {
+            $all[$k] += $v;
+        }
+    }
+
+    $app->smarty->assign( "totals", $all );
+
+    return( $app->smarty->fetch( "report.tpl") );
 }
 
 function admin_panel($req, $resp, $svc, $app, $template) {
@@ -241,6 +296,16 @@ $klein->respond("POST", "/admin/update", function($req, $resp, $svc, $app) use (
     return(json_encode($r));
 });
 
+// useful for prefetched pages, but not using this feature yet
+/*
+function cache_headers_for( $seconds_to_cache = 60 ) {
+    $ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . " GMT";
+    header("Expires: $ts");
+    header("Pragma: cache");
+    header("Cache-Control: max-age=$seconds_to_cache");
+}
+*/
+
 $klein->respond("/admin/", function($req, $resp, $svc, $app) use ($template) {
     return(admin_panel($req, $resp, $svc, $app, $template));
 });
@@ -248,6 +313,16 @@ $klein->respond("/admin/", function($req, $resp, $svc, $app) use ($template) {
 // admin / 2015 / 08 /
 $klein->respond("/admin/[i:year]/[i:month]/", function($req, $resp, $svc, $app) use ($template) {
     return(admin_panel($req, $resp, $svc, $app, $template));
+});
+
+// admin / report /
+$klein->respond("/admin/report/", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_report_panel($req, $resp, $svc, $app, $template));
+});
+
+// admin / report / 2015 / 08 /
+$klein->respond("/admin/report/[i:year]/[i:month]/", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_report_panel($req, $resp, $svc, $app, $template));
 });
 
 // ===========================================================================
