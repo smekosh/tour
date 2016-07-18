@@ -76,7 +76,7 @@ td { padding:0px !important }
 .visitor_count_breakdowns li { text-align: right; list-style: none }
 
 .nyet .cell-liner { /*border: 2px solid silver*/ }
-.jumbotron h2 a { color: white; font-size: 20px !important; }
+.jumbotron h2 a { color: white; font-size: 20px !important; background-color: rgba(0,0,0,0.2); padding:0.5em }
 .jumbotron-selected { text-decoration: underline }
 .mout { /*background-color: wheat;*/ }
 .mout .cell-liner { /*border: 2px solid black */ }
