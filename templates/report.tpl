@@ -44,7 +44,7 @@ tr.even { background-color: rgba(100,100,100,0.1); }
             <th rowspan="2">Day</th>
             <th colspan="2" class="ctr">Daily</th>
             <th colspan="2" class="ctr">Special</th>
-            <th rowspan="2">Total Count</th>
+            <th rowspan="2" class="subr">Total Count</th>
             <th rowspan="2">Closed?</th>
         </tr>
         <tr>
@@ -86,8 +86,8 @@ tr.even { background-color: rgba(100,100,100,0.1); }
             <th rowspan="2"></th>
             <th colspan="2" class="ctr">Daily</th>
             <th colspan="2" class="ctr">Special</th>
-            <th rowspan="2">Total Count</th>
-            <th rowspan="2">Closed?</th>
+            <th rowspan="2" class="subr">Total Count</th>
+            <th rowspan="2"></th>
         </tr>
         <tr class="repeated-header">
             <th class="subr">Groups</th>
