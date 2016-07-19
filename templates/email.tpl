@@ -12,9 +12,11 @@
     <li>Organizer email: {$reservation.organizer_email}</li>
     <li><p>Guests</p>
         <ol>
+{if isset($reservation.guests)}
 {foreach from=$reservation.guests item=guest}
             <li>{$guest}</li>
 {/foreach}
+{/if}
         </ol>
     </li>
 {if $reservation.type_of_tour == "Daily"}
