@@ -381,7 +381,6 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
 
     $app->smarty->assign("reservation", $req->params() );
     $app->smarty->assign("remote_ip", $_SERVER["REMOTE_ADDR"]);
-    $email_body = $app->smarty->fetch( "email.tpl" );
 
     // saving only the rudimentary data
     $day = new Tours;
@@ -399,17 +398,38 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
     $mail->addAddress(ADMIN_EMAIL);
     $mail->isHTML(true);
 
+    // sending 3 emails now
+    $fail_counter = 0;
+
+    // email confirmation 1
     if( $req->type_of_tour === "Daily" ) {
         $mail->Subject = "Daily Reservation {$day_db->visit_day}, {$req->number_of_visitors} visitors ({$_SERVER["REMOTE_ADDR"]})";
     } else {
         $mail->Subject = "Special Reservation {$day_db->visit_day}, {$req->number_of_visitors} visitors ({$_SERVER["REMOTE_ADDR"]})";
     }
-    $mail->Body = $email_body;
+    $mail->Body = $app->smarty->fetch( "email.tpl" );
+
+    if( !$mail->send() ) $fail_counter++;
+
+    // email confirmation 2
+    $mail->Subject = "YOUR RESERVATION FOR THE VOA STUDIO TOUR IS CONFIRMED";
+    $mail->Body = $app->smarty->fetch( "email2.tpl" );
+    $mail->addAttachment("img/voa-logo.jpg", "voa-logo.jpg");
+    if( !$mail->send() ) $fail_counter++;
+
+    // email confirmation 3
+    if( $req->type_of_tour === "Daily" ) {
+        $mail->Subject = "Daily Reservation roster {$day_db->visit_day}, {$req->number_of_visitors} visitors";
+    } else {
+        $mail->Subject = "Special Reservation roster {$day_db->visit_day}, {$req->number_of_visitors} visitors";
+    }
+    $mail->Body = $app->smarty->fetch( "email3.tpl" );
+    if( !$mail->send() ) $fail_counter++;
 
     $retarr = array();
     $retarr["status"] = "good"; // until not
 
-    if( !$mail->send() ) {
+    if( $fail_counter > 0 ) {
         $retarr["message"] = "ERROR: message could not be sent . Please contact the VOA tour office.";
     } else {
         $retarr["message"] = "Thank you, your reservation has been sent.";
