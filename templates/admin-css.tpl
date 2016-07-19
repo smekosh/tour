@@ -106,6 +106,18 @@ td { padding:0px !important }
 .friendly_month { float: right; color: silver; }
 .modal label { cursor: pointer }
 
+/* report page */
+
+.report { /*max-width: 900px*/ }
+.report td { padding: 0.5em !important; height:inherit !important }
+td.date {  }
+td.num { text-align: right }
+.ctr { text-align: center }
+.subr { text-align: right }
+tr.even { background-color: rgba(100,100,100,0.1); }
+.odd .tot { font-weight: bold !important; background-color: rgba(100,100,100,0.1) !important; }
+.even .tot { font-weight: bold !important; background-color: rgba(100,100,100,0.1) !important; }
+.spreadsheet { font-size: 0.5em; margin-left: 4em }
 
 @media print {
     .jumbotron { display: none }

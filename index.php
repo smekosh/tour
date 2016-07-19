@@ -217,7 +217,7 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     ));
 }
 
-function admin_report_panel($req, $resp, $svc, $app, $template) {
+function admin_report_panel($req, $resp, $svc, $app, $template, $excel = false) {
     $auth = new VOA_Auth(); // die if not auth
     $app->smarty->assign("page", "report");
 
@@ -249,7 +249,17 @@ function admin_report_panel($req, $resp, $svc, $app, $template) {
 
     $app->smarty->assign( "totals", $all );
 
-    return( $app->smarty->fetch( "report.tpl") );
+    if( $excel === true ) {
+        $filename = sprintf("tour-%s-%s.xls", $req->year, $req->month );
+
+        header( "Content-type: application/excel" );
+        header( "Content-Disposition: attachment; filename={$filename}");
+
+        $app->smarty->assign("excel", "1");
+        return( $app->smarty->fetch( "report-table.tpl") );
+    } else {
+        return( $app->smarty->fetch( "report.tpl") );
+    }
 }
 
 function admin_panel($req, $resp, $svc, $app, $template) {
@@ -323,6 +333,11 @@ $klein->respond("/admin/report/", function($req, $resp, $svc, $app) use ($templa
 // admin / report / 2015 / 08 /
 $klein->respond("/admin/report/[i:year]/[i:month]/", function($req, $resp, $svc, $app) use ($template) {
     return(admin_report_panel($req, $resp, $svc, $app, $template));
+});
+
+// admin / report / 2015 / 08 / excel /
+$klein->respond("/admin/report/[i:year]/[i:month]/excel/", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_report_panel($req, $resp, $svc, $app, $template, true));
 });
 
 // ===========================================================================
