@@ -1,3 +1,5 @@
+<p style="font-family:Calibri; font-size:15px">To: {$reservation.organizer_name} ({$reservation.organizer_email})</p>
+
 <img width="179" height="100" border="0" alt="Voice of America Logo" title="Voice of America" src="voa-logo.jpg" />
 
 <p style="font-family:Calibri; font-size:15px">Thank you for making a reservation for the VOA Studio Tour.  Your reservation for <strong>{$reservation.tour_date|date_format:"F d, Y"}{if $reservation.type_of_tour == "Daily"} at 12:00 p.m.{/if}</strong> is confirmed.</p>
