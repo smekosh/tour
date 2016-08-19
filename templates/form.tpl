@@ -319,6 +319,8 @@ jQuery(function($){
 
     $("#tourType1").click(function() {
         VOA_form.Set("type_of_tour", "Daily");
+        $(".next a").show();
+        $("#why-disabled").hide();
 
         // update calendar, because different rules apply
         jQuery('#datetimepicker3').datetimepicker(picker_options);
@@ -328,11 +330,13 @@ jQuery(function($){
 
     $("#tourType2").click(function() {
         VOA_form.Set("type_of_tour", "Special");
+        $(".next a").hide();
+        $("#why-disabled").show();
 
         // update calendar, because different rules apply
-        jQuery('#datetimepicker3').datetimepicker(picker_options);
+        // jQuery('#datetimepicker3').datetimepicker(picker_options);
 
-        $("#question_4_1").html("Any particular interests?");
+        // $("#question_4_1").html("Any particular interests?");
     });
 
     $(".carousel").on('slid.bs.carousel', function() {

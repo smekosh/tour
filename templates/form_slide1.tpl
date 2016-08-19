@@ -16,7 +16,7 @@
 		<div class="radio">
 		  <label>
 		    <input type="radio" name="tourType" id="tourType1" value="Daily" checked>
-		    Daily tour at noon
+		    Yes, daily tour at <strong>noon</strong> (12 PM).
 		  </label>
 		</div>
 		<div class="radio">
@@ -25,6 +25,10 @@
 		    Requesting a special tour outside of normal hours
 		  </label>
 		</div>
+
+		<p id="why-disabled" style="display:none">
+			To arrange special group tours, please email us at <a href="mailto:PublicRelations@voanews.com">PublicRelations@voanews.com</a> or call <a href="tel:12022034990">(202) 203-4990</a>.
+		</p>
 	</div>
 
 </div><!-- end .visible-xs-block -->

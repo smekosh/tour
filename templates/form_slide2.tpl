@@ -5,6 +5,6 @@
 
     <input id="datetimepicker3" type="text"/>
 
-    <p>Please select an available date and then click next.</p>
+    <p>Please select an available date and then click next. Tours are conducted at <strong>noon</strong> (12 PM).</p>
 
 </div>
