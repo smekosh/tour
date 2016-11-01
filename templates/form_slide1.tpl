@@ -27,7 +27,7 @@
 		</div>
 
 		<p id="why-disabled" style="display:none">
-			To arrange special group tours, please email us at <a href="mailto:PublicRelations@voanews.com">PublicRelations@voanews.com</a> or call <a href="tel:12022034990">(202) 203-4990</a>.
+			To arrange special group tours, please email us at <a href="mailto:PublicRelations@voanews.com">PublicRelations@voanews.com</a>.
 		</p>
 	</div>
 

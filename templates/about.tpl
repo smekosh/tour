@@ -28,14 +28,14 @@
 
 
 		<h3>Commercial Tour Companies</h3>
-		<p>To find out how to include VOA in your tour route, please call <a href="tel:+12022034990">(202) 203-4990</a>.</p>
+		<p>To find out how to include VOA in your tour route, please <a href="mailto:publicrelations@voanews.com">email publicrelations@voanews.com</a>.</p>
 
 
 		<h3>Reservations</h3>
 
 		<ul>
-		    <li>For groups of 5 or more visitors, we ask that you please call to arrange a private tour <a href="tel:+12022034990">(202) 203-4990</a>. Groups are limited to 20 visitors. </li>
-		    <li>Reservations are recommended and can be made online or by phone <a href="tel:+12022034990">(202) 203-4990</a>.</li>
+		    <li>For groups of 5 or more visitors, we ask that you please <a href="mailto:publicrelations@voanews.com">email publicrelations@voanews.com</a>. Groups are limited to 20 visitors. </li>
+		    <li>Reservations are recommended and can be made <a href="http://www.voatour.com/visit/">online</a>.</li>
 		    <li>While walk-ins are accepted, we recommend that you call ahead or check the reservation system online, since public tours may occasionally be closed for private groups or special events being held in the building.</li>
 		    <li>When making a reservation, please indicate if a wheelchair or any other assistance is needed. </li>
 		</ul>
