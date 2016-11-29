@@ -362,6 +362,19 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
     ;
     */
 
+    $svc->addValidator('dateappropriate', function($str) {
+        $ts = strtotime($str);
+        $limit = strtotime("2017-01-01");
+
+        if( $ts > $limit ) return( false );
+        return( true );
+    });
+
+    $svc->validateParam(
+        "tour_date",
+        "Error: Date is <strong>unavailable</strong>."
+    )->isDateappropriate();
+
     $svc->validateParam(
         "organizer_name",
         "Error: Please enter the organizer's <strong>full name</strong>."

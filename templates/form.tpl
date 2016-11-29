@@ -280,6 +280,9 @@ jQuery(function($){
         // disable weekends
         $(that).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled').prop("title", "Day unavailable");
 
+        // disable after jan 1, 2017
+        $(that).find(".xdsoft_date[data-year!='2016']").addClass("xdsoft_disabled");
+
         var cal = that;
 
         if( VOA_form.data.type_of_tour.value === "Daily" ) {
