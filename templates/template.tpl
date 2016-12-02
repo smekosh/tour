@@ -17,6 +17,8 @@
     {$title = "Admin {$current->year}/{$current->month} | VOA Studio Tour"}
 {elseif $page == "report"}
     {$title = "Report {$current->year}/{$current->month} | VOA Studio Tour"}}
+{elseif $page == "edit"}
+    {$title = "Edit Text | VOA Studio Tour"}}
 {/if}
 {/capture}
 {capture assign="canonical"}

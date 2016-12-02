@@ -217,6 +217,24 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     ));
 }
 
+function admin_edit_panel($req, $resp, $svc, $app, $template, $excel = false) {
+    $auth = new VOA_Auth(); // die if not auth
+    $app->smarty->assign("page", "edit");
+    $copy = json_decode(file_get_contents("copy.json"));
+    $app->smarty->assign("copy", $copy);
+    if( is_null($req->slug) ) {
+        $app->smarty->assign("overview", true);
+    } else {
+        $edit_slug = str_replace("_", "/", $req->slug);
+        if( !isset( $copy->pages->$edit_slug) ) {
+            die( "Error: page <code>{$edit_slug}</code> does not exist" );
+        }
+        $app->smarty->assign("edit_slug", $edit_slug );
+        $app->smarty->assign("edit_page", $copy->pages->$edit_slug );
+    }
+    return( $app->smarty->fetch( "edit.tpl") );
+}
+
 function admin_report_panel($req, $resp, $svc, $app, $template, $excel = false) {
     $auth = new VOA_Auth(); // die if not auth
     $app->smarty->assign("page", "report");
@@ -328,6 +346,16 @@ $klein->respond("/admin/[i:year]/[i:month]/", function($req, $resp, $svc, $app) 
 // admin / report /
 $klein->respond("/admin/report/", function($req, $resp, $svc, $app) use ($template) {
     return(admin_report_panel($req, $resp, $svc, $app, $template));
+});
+
+// admin / edit /
+$klein->respond("/admin/edit/", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_edit_panel($req, $resp, $svc, $app, $template));
+});
+
+// admin / edit / 1 /
+$klein->respond("/admin/edit/[:slug]", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_edit_panel($req, $resp, $svc, $app, $template));
 });
 
 // admin / report / 2015 / 08 /

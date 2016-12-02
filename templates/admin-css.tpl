@@ -1,5 +1,5 @@
 <style type="text/css">
-td { width: 14.285% }
+.admin-table td { width: 14.285% }
 .nyet { background-color: #AAAAAA; }
 .calendar-day {
     background-color: rgba(100, 100, 100, 0.5);
@@ -65,7 +65,7 @@ td.details_num {
 }
 .total_cl { background-color: #DDDDDD }
 
-td { padding:0px !important }
+.admin-table td { padding:0px !important }
 .cell-liner {
     /*border:2px solid white;*/
     /*width: 100%;*/

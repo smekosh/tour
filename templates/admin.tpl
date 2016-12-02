@@ -153,7 +153,7 @@ $(".modal-trigger-details").click( function(e) {
 </h1>
 
 <div class="table">
-<table class="table table-bordered reservation-calendar">
+<table class="table table-bordered reservation-calendar admin-table">
     <thead>
         <tr>
             <th>Sun</th>

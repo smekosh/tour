@@ -1,0 +1,20 @@
+{
+    "pages": {
+        "/": {
+            "title": "Home",
+            "status": "published",
+            "teaser": "Tours of the VOA radio and television studios in Washington are available to the public. It's a fascinating look at the largest U.S. international broadcast operation.",
+            "content": [
+                ""
+            ]
+        },
+        "/about/": {
+            "title": "About the Tour",
+            "status": "draft",
+            "teaser": "",
+            "content": [
+                "Daily Tours"
+            ]
+        }
+    }
+}

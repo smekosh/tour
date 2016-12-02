@@ -3,7 +3,7 @@
 {if isset($excel)}style="background-color:silver"{/if}
 {/function}
 
-<table class="table table-bordered report">
+<table class="table table-bordered report admin-table">
     <thead>
         <tr>
             <th {es1} rowspan="2">Date</th>
