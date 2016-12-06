@@ -7,14 +7,31 @@
 <script src="{$homepage}/js/markdown-it.min.js"></script>
 
 <style type="text/css">
-stuff { display: flex; }
-editor { margin-right: 1em }
-preview { margin-left: 1em }
+stuff { display: flex; align-items: stretch; }
+editor {
+    margin-right: 1em;
+    width: 40%;
+    border-right: 3px dotted #c0c0c0;
+    padding-right: 1em;
+}
+preview {
+    margin-left: 1em;
+    width: 60%;
+}
+stuff.top {
+    border-bottom: 3px dotted #c0c0c0;
+    padding-bottom:1em;
+}
+editor textarea { width: 100%; resize:vertical; }
+textarea.content { min-height: 500px }
+
 .table-edit-list td { width: 45% }
 .table-edit-list td:last-child { width: 10% }
 .table-edit-header td { width: 20% }
 .table-edit-header td:last-child { width: 80% }
 .table-edit-header td:last-child input { width: 100% }
+
+
 </style>
 
 {*<!--
@@ -88,10 +105,10 @@ preview { margin-left: 1em }
     </form>
 </prestuff>
 
-<stuff>
+<stuff class="top">
     <editor>
         <h4>Teaser</h4>
-        <textarea class="edit" preview="p1"></textarea>
+        <textarea id="t1" class="edit teaser" preview="p1">{$edit_page->teaser_markdown}</textarea>
     </editor>
     <preview>
         <h4>Preview</h4>
@@ -99,16 +116,22 @@ preview { margin-left: 1em }
     </preview>
 </stuff>
 
-<stuff>
+<stuff class="bottom">
     <editor>
         <h4>Content</h4>
-        <textarea class="edit" preview="p2"></textarea>
+        <textarea id="t2" class="edit content" preview="p2">{$edit_page->content_markdown}</textarea>
     </editor>
     <preview>
         <h4>Preview</h4>
         <div id="p2"></div>
     </preview>
 </stuff>
+
+<conclusion>
+    <input id="b_s" type="button" class="btn btn-default btn-lg" value="Save" />
+    <input id="b_p" type="button" class="btn btn-default btn-lg" value="Preview Full Page" />
+</conclusion>
+
 {/if}
 
 {/block}
@@ -118,10 +141,45 @@ preview { margin-left: 1em }
 var md = window.markdownit();
 // var result = md.render('# markdown-it rulezz!');
 $(".edit").on("change keyup keydown", function() {
-    var val = $(this).val();
-    var win = $(this).attr("preview");
-    var res = md.render(val);
-    $("#" + win).html(res);
+    render();
+});
+
+function render() {
+    $(".edit").each(function() {
+        var val = $(this).val();
+        var win = $(this).attr("preview");
+        var res = md.render(val);
+        $("#" + win).html(res);
+    });
+}
+
+render();
+
+$("#b_s").click(function() {
+    $.ajax(
+        "{$homepage}/admin/edit/{$edit_slug|replace:'/':'_'}",
+        {
+            method: "post",
+            dataType: "json",
+            // dataType: "html",
+            data: {
+                title: $("#page-title").val(),
+                new_slug: $("#page-slug").val(),
+                status: $("input[name=page-status]:checked").val(),
+                teaser_html: md.render($("#t1").val()),
+                teaser_markdown: $("#t1").val(),
+                content_html: md.render($("#t2").val()),
+                content_markdown: $("#t2").val()
+            },
+            success: function(e) {
+                if( e.status === "ok") {
+                    window.location = '{$homepage}/admin/edit/';
+                } else {
+                    alert( "ERROR: ", e.message );
+                }
+            }
+        }
+    )
 });
 </script>
 

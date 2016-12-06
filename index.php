@@ -217,6 +217,41 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     ));
 }
 
+// update
+function admin_edit_panel_post($req, $resp, $svc, $app, $template, $excel = false) {
+    $auth = new VOA_Auth(); // die if not auth
+    $copy = json_decode(file_get_contents("copy.json"));
+    $ret = array();
+
+    $slug = str_replace("_", "/", $req->slug);
+
+    // update requires all pages exist, can't create new
+    if( !isset( $copy->pages->$slug ) ) {
+        $ret["status"] = "fail";
+        $ret["message"] = "slug {$slug} missing :/";
+        echo json_encode($ret);
+        die;
+    }
+
+    $copy->pages->$slug->title = $req->title;
+    $copy->pages->$slug->status = $req->status;
+    $copy->pages->$slug->teaser_markdown = $req->teaser_markdown;
+    $copy->pages->$slug->teaser_html = $req->teaser_html;
+    $copy->pages->$slug->content_markdown = $req->content_markdown;
+    $copy->pages->$slug->content_html = $req->content_html;
+
+    file_put_contents("copy.json", json_encode($copy));
+    #echo "<PRE>";
+    #print_r( $copy );
+    #var_dump( $req->slug );
+    #var_dump( $req->new_slug );
+    #print_r( $req );
+    $ret["status"] = "ok";
+    $ret["message"] = filesize("copy.json");
+    echo json_encode($ret);
+    die;
+}
+
 function admin_edit_panel($req, $resp, $svc, $app, $template, $excel = false) {
     $auth = new VOA_Auth(); // die if not auth
     $app->smarty->assign("page", "edit");
@@ -353,9 +388,14 @@ $klein->respond("/admin/edit/", function($req, $resp, $svc, $app) use ($template
     return(admin_edit_panel($req, $resp, $svc, $app, $template));
 });
 
-// admin / edit / 1 /
+// admin / edit / _about_ /
 $klein->respond("/admin/edit/[:slug]", function($req, $resp, $svc, $app) use ($template) {
     return(admin_edit_panel($req, $resp, $svc, $app, $template));
+});
+
+// POST admin / edit / _about_ /
+$klein->respond("post", "/admin/edit/[:slug]", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_edit_panel_post($req, $resp, $svc, $app, $template));
 });
 
 // admin / report / 2015 / 08 /
