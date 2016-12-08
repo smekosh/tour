@@ -227,29 +227,63 @@ function admin_edit_panel_post($req, $resp, $svc, $app, $template, $excel = fals
 
     // update requires all pages exist, can't create new
     if( !isset( $copy->pages->$slug ) ) {
-        $ret["status"] = "fail";
-        $ret["message"] = "slug {$slug} missing :/";
-        echo json_encode($ret);
-        die;
+        //$ret["status"] = "fail";
+        //$ret["message"] = "slug {$slug} missing :/";
+        //echo json_encode($ret);
+        $copy->pages->$slug = new stdClass();
     }
 
+    $copy->pages->$slug = new stdClass();
+
     $copy->pages->$slug->title = $req->title;
+
+    if( $req->slug === "new" ) {
+        $copy->pages->$slug->slug = $req->new_slug;
+    } else {
+        $copy->pages->$slug->slug = $req->slug;
+    }
+
     $copy->pages->$slug->status = $req->status;
+    $copy->pages->$slug->columns = $req->columns;
     $copy->pages->$slug->teaser_markdown = $req->teaser_markdown;
     $copy->pages->$slug->teaser_html = $req->teaser_html;
-    $copy->pages->$slug->content_markdown = $req->content_markdown;
-    $copy->pages->$slug->content_html = $req->content_html;
+    $copy->pages->$slug->content = array( new stdClass(), new stdClass(), new stdClass() );
+
+    for( $i = 0; $i < 3; $i++ ) {
+        $copy->pages->$slug->content[$i]->markdown = $req->content[$i]["markdown"];
+        $copy->pages->$slug->content[$i]->html = $req->content[$i]["html"];
+    }
+
+    if( $slug == "/preview/" ) {
+        $ret["url"] = HOMEPAGE . "/preview/?ts=" . time();
+        $copy->pages->$slug->status = "draft";
+    }
 
     file_put_contents("copy.json", json_encode($copy));
-    #echo "<PRE>";
-    #print_r( $copy );
-    #var_dump( $req->slug );
-    #var_dump( $req->new_slug );
-    #print_r( $req );
+
     $ret["status"] = "ok";
     $ret["message"] = filesize("copy.json");
     echo json_encode($ret);
     die;
+}
+
+function get_new_page() {
+    $temp = new stdClass();
+    $temp->status = "draft";
+    $temp->slug = "new";
+    $temp->title = "Untitled";
+    $temp->teaser_markdown = "";
+    $temp->teaser_html = "";
+    $temp->columns = 1;
+
+    $blank = new stdClass();
+    $blank->markdown = "";
+    $blank->html = "";
+    $temp->content = array(
+        $blank, $blank, $blank
+    );
+
+    return( $temp );
 }
 
 function admin_edit_panel($req, $resp, $svc, $app, $template, $excel = false) {
@@ -261,8 +295,10 @@ function admin_edit_panel($req, $resp, $svc, $app, $template, $excel = false) {
         $app->smarty->assign("overview", true);
     } else {
         $edit_slug = str_replace("_", "/", $req->slug);
+
         if( !isset( $copy->pages->$edit_slug) ) {
-            die( "Error: page <code>{$edit_slug}</code> does not exist" );
+            #die( "Error: page <code>{$edit_slug}</code> does not exist" );
+            $copy->pages->$edit_slug = get_new_page();
         }
         $app->smarty->assign("edit_slug", $edit_slug );
         $app->smarty->assign("edit_page", $copy->pages->$edit_slug );
