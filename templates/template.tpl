@@ -57,9 +57,9 @@
     <meta name="twitter:url" content="{$canonical}">
     <meta name="twitter:image" content="{$homepage}/img/voa-tour-share-1200x650.jpg">
 
-    <meta name="DISPLAYDATE" content="August 10, 2015">
-    <meta itemprop="dateModified" content="2015-08-10">
-    <meta itemprop="datePublished" content="2015-08-10">
+    <meta name="DISPLAYDATE" content="January 1, 2017">
+    <meta itemprop="dateModified" content="2017-01-01">
+    <meta itemprop="datePublished" content="2017-01-01">
 
 
     <!-- Bootstrap core CSS -->
@@ -106,7 +106,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="{if $page == "index"}active{/if}"><a href="{$homepage}/">Home</a></li>
                     <li class="{if $page == "about"}active{/if}"><a href="{$homepage}/about/">About the Tour</a></li>
-                    <li class="{if $page == "form"}active{/if}"><a href="{$homepage}/visit/">Take the Tour</a></li>
                     <li class="{if $page == "directions"}active{/if}"><a href="{$homepage}/directions/">Address &amp; Directions</a></li>
                     <li class="{if $page == "bring"}active{/if}"><a href="{$homepage}/what-to-bring/">What to Bring</a></li>
                 </ul>

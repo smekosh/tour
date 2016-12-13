@@ -4,7 +4,6 @@
 
 <h1>Visit VOA!</h1>
 <p>Tours of the VOA radio and television studios in Washington are available to the public. It's a fascinating look at the largest U.S. international broadcast operation.</p>
-<p><a href="{$homepage}/visit/" class="btn btn-primary btn-lg" role="button">Take the Tour &raquo;</a></p>
 
 {/block}
 
