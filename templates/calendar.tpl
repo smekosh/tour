@@ -34,21 +34,8 @@ table.reservation-calendar td { padding: 4px !important }
                         </div>
     {/if}
 
-    {if isset($reservations[$day])}
-                        <ul class="visitor_count_breakdowns" >
-                            <li>Daily: {$reservations[$day].Daily}</li>
-                            <li>Special: {$reservations[$day].Special}</li>
-                            <li class="total">Total: {$reservations[$day].Total}</li>
-                        </ul>
-    {/if}
                         <div class="clearfix"></div>
-
-                        <div class="mousemenu">
-    {if isset($reservations[$day])}
-        <a class="modal-trigger-details" day="{$day}" href="#">Details</a>
-    {/if}
-                        </div>
-                    </div>
+                </div>
                 </td>
         {/foreach}
             </tr>
