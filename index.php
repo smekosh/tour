@@ -118,6 +118,14 @@ foreach( $simple_pages as $route => $template ) {
     $klein->respond($route, function($req, $resp, $svc, $app) use ($template, $reservation_range) {
         $app->smarty->assign("page", $template);
         $app->smarty->assign("reservation_range", $reservation_range);
+
+        $data = admin_panel_data($req, $resp, $svc, $app, $template);
+
+        // all assignments at once
+        foreach( $data as $k => $v ) {
+            $app->smarty->assign( $k, $v );
+        }
+        
         return( $app->smarty->fetch( "{$template}.tpl" ) );
     });
 }
