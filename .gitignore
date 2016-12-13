@@ -8,3 +8,5 @@ cache/*
 composer.lock
 .htaccess
 *.htaccess
+
+.DS_Store

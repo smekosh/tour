@@ -116,8 +116,14 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">
-{include file="calendar.tpl"}
-{block name="jumbotron"}{/block}
+            <div class="row">
+                <div class="col-sm-6 col-md-8">
+                    {block name="jumbotron"}{/block}
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    {include file="calendar.tpl"}
+                </div>
+            </div>
         </div>
     </div>
 

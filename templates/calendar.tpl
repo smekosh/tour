@@ -1,15 +1,9 @@
-<style>
-td.nyet { background-color: crimson }
-td.closed { background-color: crimson }
-td.today { font-weight: bold}
-table.reservation-calendar td { padding: 4px !important }
-</style>
 
-<div style="float:right">
-
-    <div class="table">
+<div class="table">
     <table class="table table-bordered reservation-calendar">
         <thead>
+            <tr><th colspan="7" class="tour-table-title">Tour Availability</th></tr>
+            
             <tr>
                 <th>Sun</th>
                 <th>Mon</th>
@@ -30,6 +24,7 @@ table.reservation-calendar td { padding: 4px !important }
     {if $day}
                         <div class="calendar-day">
                             <span class="calendar-day-label">{$day|date_format:"%#d"}</span>
+                            {* <span class="calendar-day-label">{$day|date_format:"j"}</span> *}
                             <div class="clearfix"></div>
                         </div>
     {/if}
@@ -44,5 +39,4 @@ table.reservation-calendar td { padding: 4px !important }
     </table>
 
 
-    </div>
 </div>
