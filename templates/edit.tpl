@@ -1,5 +1,7 @@
 {extends file="index.tpl"}
 
+{block name="calendar"}{/block}
+
 {block name="head"}
 {include file="admin-css.tpl"}
 

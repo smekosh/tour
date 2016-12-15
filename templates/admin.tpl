@@ -1,5 +1,7 @@
 {extends file="index.tpl"}
 
+{block name="calendar"}{/block}
+
 {block name="footer"}
 <script>
 

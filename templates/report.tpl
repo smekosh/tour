@@ -1,7 +1,8 @@
 {extends file="index.tpl"}
 
-{block name="footer"}
-{/block}
+{block name="calendar"}{/block}
+
+{block name="footer"}{/block}
 
 {block name="head"}
 {include file="admin-css.tpl"}
