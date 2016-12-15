@@ -26,9 +26,9 @@
 		<p>Public lots are located nearby.</p>
 
 
-		<h3>Closest Metro Stations</h3>
+		<h3>Closest Metrorail Stations</h3>
 
-		<h4>Federal Center Southwest Metrorail<br />
+		<h4>Federal Center Southwest Station<br />
 			<small>(<span style="color:#0a94d6; font-weight:bold;">Blue</span>, <span style="color:#de8703; font-weight:bold;">Orange</span> &amp; <span style="color:#a1a3a1; font-weight:bold;">Silver</span> lines)</small>
 		</h4>
         <ul>
@@ -37,7 +37,7 @@
             <li>VOA's entrance is in the middle of the block, between 3rd and 4th Streets.</li>
         </ul>
 
-		<h4>L'Enfant Plaza Metrorail<br />
+		<h4>L'Enfant Plaza Station<br />
 			<small>(<span style="color:#f7d417; font-weight:bold;">Yellow</span>, <span style="color:#00b052; font-weight:bold;">Green</span>, <span style="color:#0a94d6; font-weight:bold;">Blue</span>, <span style="color:#de8703; font-weight:bold;">Orange</span> &amp; <span style="color:#a1a3a1; font-weight:bold;">Silver</span> lines)</small></h4>
         <ul>
 			<li>Take the 7th Street/Maryland Ave. exit and walk east to the corner of 4th Street and Independence Avenue. </li>

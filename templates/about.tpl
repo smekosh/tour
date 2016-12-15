@@ -12,16 +12,16 @@
 
 	<div class="col-md-8">
 
-		<p>The Voice of America Studio Tour offers a firsthand look at VOA's live news and information programming that is available to an international audience in 47 languages on multiple platforms, including radio, television, and the Internet.</p>
+		<p>The Voice of America Studio Tour offers a firsthand look at VOA's live news and information programming that is available to an international audience of our more than 40 languages on multiple platforms, including radio, television, and the Internet.</p>
 
 
 		<h3>Daily Tours</h3>
 		<ul>
-			<li>The daily VOA Studio Tour is offered Monday through Friday at 12:00 p.m. (except Federal holidays and when noted as closed on the VOATour.com</li> calendar).
+			<li>The daily VOA Studio Tour is offered Monday through Friday at 12:00 p.m. (except federal holidays and when noted as closed on the VOATour.com calendar).</li>
 			<li>Visitors should arrive 10 minutes early to go through security screening.  Those arriving after 12:00 p.m. will not be admitted.</li>
 			<li>No reservations required; tours limited to a maximum of 20 people on a first come, first served basis.</li>
 			<li>Admission:  Free</li>
-			<li>Tours last 30 to 40 minutes</li>
+			<li>Tours last 30 to 45 minutes</li>
 			<li>Tours are conducted in English only</li>
 			<li>Tour is recommended for those age 16 and above.</li>
 		</ul>
