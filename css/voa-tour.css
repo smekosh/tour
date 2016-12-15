@@ -16,6 +16,7 @@ body {
 
 .jumbotron h1 {
 	text-shadow: 0px 0px 2px #ccc;
+    margin-top:0 !important;
 }
 
 .jumbotron p {
