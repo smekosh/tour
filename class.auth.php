@@ -11,7 +11,9 @@ class VOA_Auth {
             $_SERVER['PHP_AUTH_USER'] !== ADMIN_USERNAME ||
             $_SERVER['PHP_AUTH_PW'] !== ADMIN_PASSWORD
         ) {
-            header('WWW-Authenticate: Basic realm="VOA Tour"');
+            $realm = "VOA Tour";
+            if( defined("DEVELOPMENT_MODE") ) $realm .= " dev";
+            header('WWW-Authenticate: Basic realm="' . $realm . '"');
             header('HTTP/1.0 401 Unauthorized');
             echo "This is a restricted area.";
             echo "<script>setTimeout(function() { window.location = '";
