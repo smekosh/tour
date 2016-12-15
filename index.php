@@ -173,6 +173,7 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     $prev = admin_panel_ym(strtotime("-1 month", $ts));
     $next = admin_panel_ym(strtotime("+1 month", $ts));
     $next2 = admin_panel_ym(strtotime("+2 month", $ts));
+    $next3 = admin_panel_ym(strtotime("+3 month", $ts));
 
     // data only contains month's shape
     $calendar_data = new VOA_calendar($req->year, $req->month);
@@ -180,6 +181,9 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
 
     $calendar_data_next = new VOA_calendar($next->year, $next->month);
     $calendar_next = $calendar_data_next->getMonth();
+
+    $calendar_data_next2 = new VOA_calendar($next2->year, $next2->month);
+    $calendar_next2 = $calendar_data_next2->getMonth();
 
     // data contains closed days
     $closed = Tours::
@@ -194,7 +198,8 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
         $closed_simple[$day->visit_day] = 1;
     }
 
-    // ............
+    // ----------------------------------
+
     $closed_next = Tours::
         where("closed", "Yes")
         ->where("visit_day", ">=", "{$next->year}-{$next->month}-01" )
@@ -206,6 +211,20 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     foreach( $closed_next as $day ) {
         $closed_next_simple[$day->visit_day] = 1;
     }
+
+    $closed_next2 = Tours::
+        where("closed", "Yes")
+        ->where("visit_day", ">=", "{$next2->year}-{$next2->month}-01" )
+        ->where("visit_day", "<", "{$next3->year}-{$next3->month}-01" )
+        ->get();
+
+    // complex data structure reduced to array keys, for easy template lookup
+    $closed_next2_simple = array();
+    foreach( $closed_next2 as $day ) {
+        $closed_next2_simple[$day->visit_day] = 1;
+    }
+
+    // ----------------------------------
 
     // data contains day count_chars
     $reservations = Tours::
@@ -248,8 +267,10 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
         "prev" => $prev,
         "calendar" => $calendar,
         "calendar_next" => $calendar_next,
+        "calendar_next2" => $calendar_next2,
         "closed" => $closed_simple,
         "closed_next" => $closed_next_simple,
+        "closed_next2" => $closed_next2_simple,
         "reservations" => $reservation_count
     ));
 }
