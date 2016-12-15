@@ -3,6 +3,7 @@
 {block name="jumbotron"}
 
 <h1>What to Bring</h1>
+<p>Tours of the VOA radio and television studios in Washington are available to the public. It's a fascinating look at the largest U.S. international broadcast operation.</p>
 
 {/block}
 
