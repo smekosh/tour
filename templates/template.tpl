@@ -66,7 +66,7 @@
     <link href="{$homepage}/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{$homepage}/css/voa-tour.css?v=11113" rel="stylesheet">
+    <link href="{$homepage}/css/voa-tour.css?v=e{$version}" rel="stylesheet">
 {block name="head"}
 {/block}
 

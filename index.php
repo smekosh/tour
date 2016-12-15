@@ -43,6 +43,16 @@ $klein->respond(function($request, $response, $service, $app) {
         $smarty = new Smarty();
         $smarty->assign( "homepage", HOMEPAGE );
         $smarty->assign( "DEVELOPMENT_MODE", DEVELOPMENT_MODE );
+
+        // make sure css files cache is reset on updates
+        $master = realpath(".git/refs/heads/master");
+        if( $master === false ) {
+            $version = filemtime("index.php");
+        } else {
+            $version = trim(file_get_contents($master));
+        }
+
+        $smarty->assign( "version", $version );
         return( $smarty );
     });
 });
@@ -125,7 +135,7 @@ foreach( $simple_pages as $route => $template ) {
         foreach( $data as $k => $v ) {
             $app->smarty->assign( $k, $v );
         }
-        
+
         return( $app->smarty->fetch( "{$template}.tpl" ) );
     });
 }
