@@ -21,9 +21,10 @@
 			<li>The daily VOA Studio Tour is offered Monday through Friday at 12:00 p.m. (except federal holidays and when noted as closed on the VOATour.com calendar).</li>
 			<li>Visitors should arrive 10 minutes early to go through security screening.  Those arriving after 12:00 p.m. will not be admitted.</li>
 			<li>No reservations required; tours limited to a maximum of 20 people on a first come, first served basis.</li>
+			<li>Use the C Street entrance to the building.</li>
 			<li>Admission:  Free</li>
-			<li>Tours last 30 to 45 minutes</li>
-			<li>Tours are conducted in English only</li>
+			<li>Tours last 30 to 45 minutes.</li>
+			<li>Tours are conducted in English only.</li>
 			<li>Tour is recommended for those age 16 and above.</li>
 		</ul>
 
