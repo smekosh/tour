@@ -24,7 +24,7 @@
 
 {/strip}{if $want == "title"}{$alltitles}{else}{$allclasses|implode:" "}{/if}{/function}
 <div class="table">
-    <table class="table table-bordered reservation-calendar">
+    <table class="table table-bordered reservation-calendar-reader">
         <thead>
             <tr><th colspan="7" class="tour-table-title">Noon Tour Availability</th></tr>
             <tr>

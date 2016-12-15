@@ -156,13 +156,13 @@ footer {
 
 /* styles for calendar in header *********************************************/
 
-.table .reservation-calendar { background: transparent; }
+.table .reservation-calendar-reader { background: transparent; }
 
-.table .reservation-calendar td, .table .reservation-calendar th {
+.table .reservation-calendar-reader td, .table .reservation-calendar-reader th {
     padding:4px !important;
 }
 
-.table .reservation-calendar th {
+.table .reservation-calendar-reader th {
     background: #ddd;
     color: #666;
     font-weight: 200;
@@ -171,42 +171,42 @@ footer {
     text-transform: uppercase;
 }
 
-.table .reservation-calendar th.tour-table-title {
+.table .reservation-calendar-reader th.tour-table-title {
     background: #fff;
     color: #333;
     font-weight: 400;
 }
 
-.table .reservation-calendar td {
+.table .reservation-calendar-reader td {
     background: rgba(0, 176, 82, .6); /* green */
     color: #fff;
     font-weight: 700;
     min-width: 3.25em;
 }
 
-.table .reservation-calendar td .cell-liner { text-align: center; }
+.table .reservation-calendar-reader td .cell-liner { text-align: center; }
 
-.table .reservation-calendar td.nyet,
-.table .reservation-calendar td.closed,
-.table .reservation-calendar td.full {
+.table .reservation-calendar-reader td.nyet,
+.table .reservation-calendar-reader td.closed,
+.table .reservation-calendar-reader td.full {
     color: #ccc;
     cursor: not-allowed;
     font-weight: 200;
 }
 
-.table .reservation-calendar td.nyet,
-.table .reservation-calendar td.closed {
+.table .reservation-calendar-reader td.nyet,
+.table .reservation-calendar-reader td.closed {
     background: rgba(255, 255, 255, .2); /* almost transparent light gray */
 }
 
-.table .reservation-calendar td.full {
+.table .reservation-calendar-reader td.full {
     background: rgba(0, 0, 0, .2); /* almost transparent dark gray */
 }
 
-.table .reservation-calendar td.today { color: #ffdc00; /* yellow */ }
+.table .reservation-calendar-reader td.today { color: #ffdc00; /* yellow */ }
 
 @media ( min-width: 425px) and (max-width:767px ) {
-    .table .reservation-calendar {
+    .table .reservation-calendar-reader {
         max-width: 380px !important;
         margin: auto !important;
     }
@@ -214,8 +214,8 @@ footer {
 
 @media ( max-width: 420px ) {
 
-    .table .reservation-calendar th,
-    .table .reservation-calendar td {
+    .table .reservation-calendar-reader th,
+    .table .reservation-calendar-reader td {
         font-size: 90%;
         min-width: 0;
         padding: 6px 4px;
