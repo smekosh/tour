@@ -13,7 +13,7 @@
 
 	<div class="col-md-8">
 
-		<p>The Voice of America Studio Tour offers a firsthand look at VOA's live news and information programming that is available to an international audience of our more than 40 languages on multiple platforms, including radio, television, and the Internet.</p>
+		<p>The Voice of America Studio Tour offers a firsthand look at VOA's live news and information programming that is available to an international audience in more than 40 languages on multiple platforms, including radio, television, and the Internet.</p>
 
 
 		<h3>Daily Tours</h3>
