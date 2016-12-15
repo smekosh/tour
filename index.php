@@ -172,10 +172,14 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     $ts = strtotime("{$req->year}-{$req->month}-01");
     $prev = admin_panel_ym(strtotime("-1 month", $ts));
     $next = admin_panel_ym(strtotime("+1 month", $ts));
+    $next2 = admin_panel_ym(strtotime("+2 month", $ts));
 
     // data only contains month's shape
     $calendar_data = new VOA_calendar($req->year, $req->month);
     $calendar = $calendar_data->getMonth();
+
+    $calendar_data_next = new VOA_calendar($next->year, $next->month);
+    $calendar_next = $calendar_data_next->getMonth();
 
     // data contains closed days
     $closed = Tours::
@@ -188,6 +192,19 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     $closed_simple = array();
     foreach( $closed as $day ) {
         $closed_simple[$day->visit_day] = 1;
+    }
+
+    // ............
+    $closed_next = Tours::
+        where("closed", "Yes")
+        ->where("visit_day", ">=", "{$next->year}-{$next->month}-01" )
+        ->where("visit_day", "<", "{$next2->year}-{$next2->month}-01" )
+        ->get();
+
+    // complex data structure reduced to array keys, for easy template lookup
+    $closed_next_simple = array();
+    foreach( $closed_next as $day ) {
+        $closed_next_simple[$day->visit_day] = 1;
     }
 
     // data contains day count_chars
@@ -230,7 +247,9 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
         "next" => $next,
         "prev" => $prev,
         "calendar" => $calendar,
+        "calendar_next" => $calendar_next,
         "closed" => $closed_simple,
+        "closed_next" => $closed_next_simple,
         "reservations" => $reservation_count
     ));
 }

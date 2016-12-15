@@ -140,6 +140,23 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{$homepage}/js/bootstrap.min.js"></script>
 
+<script>
+// user calendar nav
+$("a.navigate-user-calendar").click(function() {
+    function reactivate(hide,show) {
+        $(".reservation-calendar-reader-container:eq(" + hide + ")").hide();
+        $(".reservation-calendar-reader-container:eq(" + show + ")").show();
+    }
+
+    if( $(this).hasClass("glyphicon-circle-arrow-left") ) {
+        reactivate(1,0);
+    } else {
+        reactivate(0,1);
+    }
+    return(false);
+});
+</script>
+
 {block name="footer"}{/block}
 
 </body>

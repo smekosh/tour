@@ -23,10 +23,30 @@
 {/if}
 
 {/strip}{if $want == "title"}{$alltitles}{else}{$allclasses|implode:" "}{/if}{/function}
-<div class="table">
+
+{function name=render_calendar}
+<div class="table reservation-calendar-reader-container" {if isset($month2)}style="display:none"{/if}>
     <table class="table table-bordered reservation-calendar-reader">
         <thead>
-            <tr><th colspan="7" class="tour-table-title">Noon Tour Availability</th></tr>
+            <tr>
+                <th class="tour-table-title">
+{if isset($month1)}
+    {$month1}
+{else}
+    <a href="#" title="See {$current->stamp|date_format:'F Y'}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-left"></a>
+{/if}
+
+                </th>
+                <th colspan="5" class="tour-table-title">Noon Tour Availability</th>
+                <th class="tour-table-title">
+{if isset($month2)}
+    {$month2}
+{else}
+    <a href="#" title="See {$next->stamp|date_format:'F Y'}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-right"></a>
+{/if}
+
+                </th>
+            </tr>
             <tr>
                 <th>Sun</th>
                 <th>Mon</th>
@@ -59,6 +79,16 @@
             <tr><th colspan="7" class="tour-table-title">Green indicates tour is open</th></tr>
         </tbody>
     </table>
-
-
 </div>
+{/function}
+
+{render_calendar
+    calendar=$calendar
+    closed=$closed
+    month1="Dec"
+}
+{render_calendar
+    calendar=$calendar_next
+    closed=$closed_next
+    month2="Jan"
+}
