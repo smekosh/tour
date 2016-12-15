@@ -2,6 +2,11 @@
 {$allclasses = ["tdcell"]}
 {$alltitles = "Available"}
 
+{if $smarty.now|date_format:'Y-m-d' == $day|date_format:'Y-m-d'}
+    {$allclasses[] = "today"}
+    {$alltitles = "Today"}
+{/if}
+
 {if
     $day|date_format:"D" == "Sun" ||
     $day|date_format:"D" == "Sat" ||
@@ -11,9 +16,6 @@
     {$allclasses[] = "nyet"}
     {$alltitles = "Unavailable"}
 {else}
-    {if $smarty.now|date_format:'Y-m-d' == $day|date_format:'Y-m-d'}
-        {$allclasses[] = "today"}
-    {/if}
     {if isset($closed[$day])}
         {$allclasses[] = "full"}
         {$alltitles = "Unavailable"}
@@ -24,7 +26,7 @@
 <div class="table">
     <table class="table table-bordered reservation-calendar">
         <thead>
-            <tr><th colspan="7" class="tour-table-title">Tour Availability</th></tr>
+            <tr><th colspan="7" class="tour-table-title">Noon Tour Availability</th></tr>
             <tr>
                 <th>Sun</th>
                 <th>Mon</th>

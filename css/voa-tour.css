@@ -158,6 +158,10 @@ footer {
 
 .table .reservation-calendar { background: transparent; }
 
+.table .reservation-calendar td, .table .reservation-calendar th {
+    padding:4px !important;
+}
+
 .table .reservation-calendar th {
     background: #ddd;
     color: #666;
@@ -191,24 +195,30 @@ footer {
 }
 
 .table .reservation-calendar td.nyet,
-.table .reservation-calendar td.closed { 
+.table .reservation-calendar td.closed {
     background: rgba(255, 255, 255, .2); /* almost transparent light gray */
 }
 
-.table .reservation-calendar td.full { 
+.table .reservation-calendar td.full {
     background: rgba(0, 0, 0, .2); /* almost transparent dark gray */
 }
 
 .table .reservation-calendar td.today { color: #ffdc00; /* yellow */ }
 
+@media ( min-width: 425px) and (max-width:767px ) {
+    .table .reservation-calendar {
+        max-width: 380px !important;
+        margin: auto !important;
+    }
+}
 
 @media ( max-width: 420px ) {
-    
+
     .table .reservation-calendar th,
     .table .reservation-calendar td {
         font-size: 90%;
         min-width: 0;
         padding: 6px 4px;
     }
-    
+
 }
