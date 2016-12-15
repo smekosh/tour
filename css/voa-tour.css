@@ -99,6 +99,12 @@ footer {
     border-top:1px dotted silver;
 }
 
+gnarly-spacer {
+    padding-left: 4em;
+    padding-right: 4em;
+    color: #c0c0c0;
+}
+
 .carousel-control.right, .carousel-control.left { display: none; visibility: hidden; }
 .carousel-indicators { display: none; visibility: hidden; }
 

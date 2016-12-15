@@ -131,7 +131,7 @@
 {block name="body"}{/block}
 
         <footer>
-            <p>Return to the <a href="http://www.insidevoa.com/?source=voatour">Inside VOA</a> homepage.</p>
+            <p><a href="{$homepage}/">Home</a> <gnarly-spacer>|</gnarly-spacer> Return to the <a href="http://www.insidevoa.com/?source=voatour">Inside VOA</a> homepage.</p>
         </footer>
     </div> <!-- /container -->
 
