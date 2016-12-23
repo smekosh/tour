@@ -25,17 +25,17 @@
 {/strip}{if $want == "title"}{$alltitles}{else}{$allclasses|implode:" "}{/if}{/function}
 
 {function name=render_calendar}
-<div class="table reservation-calendar-reader-container" {if isset($month2)}style="xdisplay:none"{/if}>
+<div class="table reservation-calendar-reader-container" {if isset($month_prev)}style="display:none"{/if}>
     <table class="table table-bordered reservation-calendar-reader">
         <thead>
             <tr>
                 <th class="tour-table-title">
 {if isset($month_prev)}
-                    <a href="#" title="See {$month_prev->stamp|date_format:'F Y'}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-right"></a>
+                    <a href="#" title="See {$month_prev->stamp|date_format:'F Y'}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-left"></a>
 {/if}
 
                 </th>
-                <th colspan="5" class="tour-table-title">Noon Tour Availability</th>
+                <th colspan="5" class="tour-table-title">{$calendar[1][0]|date_format:"M Y"} Noon Tour Availability</th>
                 <th class="tour-table-title">
 {if isset($month_next)}
                     <a href="#" title="See {$month_next->stamp|date_format:'F Y'}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-right"></a>
@@ -76,10 +76,6 @@
     </table>
 </div>
 {/function}
-
-<pre>
-
-</pre>
 
 {render_calendar
     calendar=$calendar

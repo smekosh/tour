@@ -143,6 +143,7 @@
 <script>
 // user calendar nav
 $("a.navigate-user-calendar").click(function() {
+    console.info( this );
     function reactivate(hide,show) {
         $(".reservation-calendar-reader-container:eq(" + hide + ")").hide();
         $(".reservation-calendar-reader-container:eq(" + show + ")").show();
