@@ -143,8 +143,14 @@
 <script>
 // user calendar nav
 $("a.navigate-user-calendar").click(function() {
-    console.info( this );
-    function reactivate(hide,show) {
+
+    var eq = $(this).attr("data-eq");
+    var go = $(this).attr("data-go");
+
+    $(".reservation-calendar-reader-container").hide();
+    $(".reservation-calendar-reader-container:eq(" + go + ")").show();
+
+/*    function reactivate(hide,show) {
         $(".reservation-calendar-reader-container:eq(" + hide + ")").hide();
         $(".reservation-calendar-reader-container:eq(" + show + ")").show();
     }
@@ -154,6 +160,7 @@ $("a.navigate-user-calendar").click(function() {
     } else {
         reactivate(0,1);
     }
+*/
     return(false);
 });
 </script>

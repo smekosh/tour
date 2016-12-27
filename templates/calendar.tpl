@@ -25,20 +25,25 @@
 {/strip}{if $want == "title"}{$alltitles}{else}{$allclasses|implode:" "}{/if}{/function}
 
 {function name=render_calendar}
-<div class="table reservation-calendar-reader-container" {if isset($month_prev)}style="display:none"{/if}>
+<div class="table reservation-calendar-reader-container" {if $calendar_prev != false}style="display:none"{/if}>
+
+    <div class="visible-month-container">
+        <div class="visible-month">{$calendar[1][0]|date_format:"%B %Y"}</div>
+    </div>
+
     <table class="table table-bordered reservation-calendar-reader">
         <thead>
             <tr>
                 <th class="tour-table-title">
-{if isset($month_prev)}
-                    <a href="#" title="See {$month_prev->stamp|date_format:'F Y'}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-left"></a>
+{if $calendar_prev != false}
+                    <a href="#" data-eq="{$eq}" data-go="{$eq-1}" title="See {$calendar_prev[1][0]|date_format:"F Y"}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-left"></a>
 {/if}
 
                 </th>
-                <th colspan="5" class="tour-table-title">{$calendar[1][0]|date_format:"M Y"} Noon Tour Availability</th>
+                <th colspan="5" class="tour-table-title">Noon Tour Availability</th>
                 <th class="tour-table-title">
-{if isset($month_next)}
-                    <a href="#" title="See {$month_next->stamp|date_format:'F Y'}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-right"></a>
+{if $calendar_next != false}
+                    <a href="#" data-eq="{$eq}" data-go="{$eq+1}" title="See {$calendar_next[1][0]|date_format:"F Y"}" class="navigate-user-calendar glyphicon glyphicon-circle-arrow-right"></a>
 {/if}
                 </th>
             </tr>
@@ -66,7 +71,7 @@
                         </div>
 {/if}
                         <div class="clearfix"></div>
-                </div>
+                    </div>
                 </td>
 {/foreach}
             </tr>
@@ -78,19 +83,26 @@
 {/function}
 
 {render_calendar
+    eq="0"
     calendar=$calendar
     closed=$closed
-    month_next=$next
+
+    calendar_prev=false
+    calendar_next=$calendar_next
 }
 {render_calendar
+    eq="1"
     calendar=$calendar_next
     closed=$closed_next
-    month_prev=$current
-    month_next=$calendar_next2
+
+    calendar_prev=$calendar
+    calendar_next=$calendar_next2
 }
 {render_calendar
+    eq="2"
     calendar=$calendar_next2
     closed=$closed_next2
-    month_prev=$next
 
+    calendar_prev=$calendar_next
+    calendar_next=false
 }

@@ -163,6 +163,19 @@ gnarly-spacer {
 
 /* styles for calendar in header *********************************************/
 
+.reservation-calendar-reader-container .visible-month-container {
+    position: absolute;
+    max-width: 100%;
+    width: 100%;
+}
+
+.reservation-calendar-reader-container .visible-month {
+    margin-top:-2em;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
 .table .reservation-calendar-reader { background: transparent; }
 
 .table .reservation-calendar-reader td, .table .reservation-calendar-reader th {
@@ -211,6 +224,16 @@ gnarly-spacer {
 }
 
 .table .reservation-calendar-reader td.today { color: #ffdc00; /* yellow */ }
+
+@media ( max-width:767px ) {
+    div.reservation-calendar-reader-container {
+        padding-top: 2em;
+    }
+
+    .reservation-calendar-reader-container .visible-month {
+        color: white;
+    }
+}
 
 @media ( min-width: 425px) and (max-width:767px ) {
     .table .reservation-calendar-reader {
