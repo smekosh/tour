@@ -242,7 +242,7 @@ $("#b_s").click(function() {
                 if( e.status === "ok") {
                     window.location = '{$homepage}/admin/edit/';
                 } else {
-                    alert( "ERROR: ", e.message );
+                    alert( "ERROR: " + e.message );
                 }
             }
         }

@@ -275,7 +275,32 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
     ));
 }
 
-// update
+// generic page render
+function webpage_render($req, $resp, $svc, $app, $doc) {
+
+    $data = admin_panel_data($req, $resp, $svc, $app, "");
+
+    // all assignments at once
+    foreach( $data as $k => $v ) {
+        $app->smarty->assign( $k, $v );
+    }
+
+    $app->smarty->assign("doc", $doc);
+    return( $app->smarty->fetch("page-generic.tpl") );
+}
+
+// preview function
+function admin_edit_panel_preview($req, $resp, $svc, $app, $template) {
+    $auth = new VOA_Auth(); // die if not auth
+
+    $copy = json_decode(file_get_contents("copy.json"));
+    $page = "/preview/";
+
+    #echo "<PRE>";echo htmlentities(print_r($copy->pages->{$page}, true)); die;
+    return( webpage_render($req, $resp, $svc, $app, $copy->pages->{$page}) );
+}
+
+// update text
 function admin_edit_panel_post($req, $resp, $svc, $app, $template, $excel = false) {
     $auth = new VOA_Auth(); // die if not auth
     $copy = json_decode(file_get_contents("copy.json"));
@@ -321,6 +346,10 @@ function admin_edit_panel_post($req, $resp, $svc, $app, $template, $excel = fals
 
     $ret["status"] = "ok";
     $ret["message"] = filesize("copy.json");
+
+    $ret["status"] = "fail";
+    $ret["message"] = "old  slug = " . $slug . ", new slug = " . $req->new_slug;
+
     echo json_encode($ret);
     die;
 }
@@ -462,6 +491,9 @@ function cache_headers_for( $seconds_to_cache = 60 ) {
     header("Cache-Control: max-age=$seconds_to_cache");
 }
 */
+$klein->respond("/preview/", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_edit_panel_preview($req, $resp, $svc, $app, $template));
+});
 
 $klein->respond("/admin/", function($req, $resp, $svc, $app) use ($template) {
     return(admin_panel($req, $resp, $svc, $app, $template));
