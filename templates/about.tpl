@@ -28,6 +28,9 @@
 			<li>Tour is recommended for those age 16 and above.</li>
 		</ul>
 
+		<h3>Group Tours</h3>
+		<p>Commercial tour companies, universities, non-government organizations and government agencies should email <a href="mailto:publicrelations@voanews.com">publicrelations@voanews.com</a> to arrange a tour.  Tours are limited to 20 people.</p>
+
 		<h3>Historic Murals</h3>
 		<p>VOA’s headquarters is home to a series of historic murals commissioned by the U.S. government to depict the Social Security Act and other New Deal programs enacted in response to the Great Depression. Lithuanian-born artist Ben Shahn was selected in 1940 to paint the most prominent of the murals. </p>
 
