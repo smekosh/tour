@@ -8,5 +8,5 @@ cache/*
 composer.lock
 .htaccess
 *.htaccess
-
+copy.json
 .DS_Store
