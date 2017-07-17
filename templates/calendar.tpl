@@ -11,7 +11,11 @@
     $day|date_format:"D" == "Sun" ||
     $day|date_format:"D" == "Sat" ||
     $day|date_format:"D" == "" ||
-    $smarty.now > $day|strtotime
+    $yesterday_at_midnight > $day|strtotime ||
+    (
+        ($day|date_format:'Y-m-d' == $today_at_noon|date_format:'Y-m-d') &&
+        $smarty.now >= $today_at_noon
+    )
 }
     {$allclasses[] = "nyet"}
     {$alltitles = "Unavailable"}

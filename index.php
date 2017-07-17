@@ -271,7 +271,9 @@ function admin_panel_data($req, $resp, $svc, $app, $template) {
         "closed" => $closed_simple,
         "closed_next" => $closed_next_simple,
         "closed_next2" => $closed_next2_simple,
-        "reservations" => $reservation_count
+        "reservations" => $reservation_count,
+        "today_at_noon" => strtotime("1 PM"),
+        "yesterday_at_midnight" => strtotime("-1 day midnight")
     ));
 }
 
