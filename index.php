@@ -652,6 +652,7 @@ $klein->respond("post", "/visit/request", function($req, $resp, $svc, $app) use 
 // something's amiss
 // ===========================================================================
 $klein->onHttpError(function($code, $router) use (&$klein) {
+    http_response_code(404);
     $router->app()->smarty->display("404.tpl");
 });
 
