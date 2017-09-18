@@ -65,7 +65,7 @@ $simple_pages = array(
     "/about/" =>            "about",
     "/directions/" =>       "directions",
     "/what-to-bring/" =>    "bring",
-    "/visit/" =>            "form"
+    #"/visit/" =>            "form"
 );
 
 // for debugging purposes
