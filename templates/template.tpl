@@ -22,7 +22,7 @@
 {/if}
 {/capture}
 {capture assign="canonical"}
-    http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}
+    //{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}
 {/capture}
 {/strip}
 <!DOCTYPE html>
@@ -131,7 +131,7 @@
 {block name="body"}{/block}
 
         <footer>
-            <p><a href="{$homepage}/">Home</a> <gnarly-spacer>|</gnarly-spacer> Return to the <a href="http://www.insidevoa.com/?source=voatour">Inside VOA</a> homepage.</p>
+            <p><a href="{$homepage}/">Home</a> <gnarly-spacer>|</gnarly-spacer> Return to the <a href="https://www.insidevoa.com/?source=voatour">Inside VOA</a> homepage.</p>
         </footer>
     </div> <!-- /container -->
 
