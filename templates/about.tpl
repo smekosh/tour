@@ -31,7 +31,7 @@
 		<h3>Group Tours</h3>
 		{* include file="calendar-sd.tpl" *}
 		<p>
-			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfpMYGRHicDUQG10JV_X7LClQMG5Kj3MPHTo1ahgMGzrb1HFQ/viewform?embedded=true" width="100%" height="1900" scrolling="no" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfpMYGRHicDUQG10JV_X7LClQMG5Kj3MPHTo1ahgMGzrb1HFQ/viewform?embedded=true" width="100%" height="2000" scrolling="yes" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 		</p>
 
 		<h3>Historic Murals</h3>
