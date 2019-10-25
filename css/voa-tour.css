@@ -225,6 +225,11 @@ gnarly-spacer {
 
 .table .reservation-calendar-reader td.today { color: #ffdc00; /* yellow */ }
 
+
+/* added to highlight Real ID additions */
+.special-highlight { background-color: #ffdc00; }
+
+
 @media ( max-width:767px ) {
     div.reservation-calendar-reader-container {
         padding-top: 2em;
