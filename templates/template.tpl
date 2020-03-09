@@ -118,6 +118,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-8">
+
+                    <p style="color:crimson; background-color:rgba(0,0,0,0.8);padding: 0.5em;">The Voice of America is canceling VOA Studio Tours until further notice due to concerns related to the Coronavirus/COVID-19.  We will be continuously reevaluating the situation, as more information on the Coronavirus/COVID-19 becomes available through official national public health channels.  We apologize in advance for any inconvenience this might cause. Please check back with us regularly for any updates.</p> 
+
                     {block name="jumbotron"}{/block}
                 </div>
                 <div class="col-sm-6 col-md-4">
