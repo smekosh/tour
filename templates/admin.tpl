@@ -7,8 +7,23 @@
 
 var days = {$reservations|json_encode};
 
+function refresh_mout(node, override) {
+    if( typeof override === "string" ) {
+        $(".mousemenu a", node).text(override);
+        return( false );
+    }
+
+    if( $(node).hasClass("error-updating") ) return( false );
+
+    var new_text = "Close Day?";
+    if( $(node).hasClass("closed") ) new_text = "Open Day?";
+
+    $(".mousemenu a", node).text(new_text);
+}
+
 $("td").not(".nyet").mouseover(function() {
     $(this).addClass("mout");
+    refresh_mout(this);
 }).mouseout(function() {
     $("td.should_close a").text("Close Day?");
     $("td.should_close").removeClass("should_close");
@@ -89,6 +104,7 @@ $("#modal_open_close_day_opened_closed_save_button").click(function(e) {
                 $(".tour_closed_notice", parent).remove();
             }
 
+            refresh_mout(parent);
             $("#modal_open_close").modal("hide");
         },
         error: function(e) {
@@ -129,6 +145,72 @@ $(".modal-trigger-details").click( function(e) {
     $("#modal_details_day").html(day);
     $("#modal_details").modal("show");
 });
+
+// 2020-12-09 shortcuts for mass edits
+
+function get_hovered_target() {
+    var res = $("td.mout");
+    if( res.length !== 1 ) return( false );
+    return( res.attr("date") );
+}
+
+function close_day_save_fast( intended_date, should_be_opened ) {
+    $.ajax({
+        type: "POST",
+        url: "{$homepage}/admin/update",
+        data: {
+            day: intended_date,
+            closed: (should_be_opened ? "yes" : "no")
+        },
+        dataType: "json",
+        success: function(data) {
+            // make sure to update the correct day
+            var parent = $("td[date='" + data.visit_day + "']");
+
+            // reset visual
+            $(".tour_closed_notice", parent).remove();
+            parent.removeClass("closed");
+
+            if( data.is_closed == "yes") {
+                parent.addClass("closed");
+                $(".calendar-day-label", parent).after('<span class="tour_closed_notice">Tour closed</span>');
+            }
+
+            // console.info(parent);
+            refresh_mout(parent);
+        },
+        error: function(e) {
+            var parent = $("td[date='" + intended_date + "']");
+            parent.addClass("error-updating");
+            refresh_mout(parent, "Error updating");
+        }
+    });
+}
+
+document.addEventListener("keydown", event => {
+
+    if( event.key === "Escape" ) {
+        $("#modal_open_close").modal("hide");
+        event.preventDefault();
+    }
+
+    if( event.key === "1" ) {
+        var payload = get_hovered_target();
+        if( payload === false ) return( false );
+
+        close_day_save_fast( payload, true );
+        event.preventDefault();
+    }
+        
+    if( event.key === "2" ) {
+        var payload = get_hovered_target();
+        if( payload === false ) return( false );
+
+        close_day_save_fast( payload, false );
+        event.preventDefault();
+    }
+});
+
 
 </script>
 {/block}
@@ -258,5 +340,9 @@ $(".modal-trigger-details").click( function(e) {
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<p>Advanced user shortcuts - hover mouse over a calendar day and press keys 1 or 2 on keyboard to quickly open / close.</p>
+<p>1 - Opens the day.</p>
+<p>2 - Closes the day.</p>
 
 {/block}

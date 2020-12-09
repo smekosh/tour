@@ -127,4 +127,5 @@ tr.even { background-color: rgba(100,100,100,0.1); }
     .repeated-header { display: none }
 }
 
+.error-updating { background-color: crimson !important };
 </style>
