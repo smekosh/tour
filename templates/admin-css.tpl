@@ -127,5 +127,6 @@ tr.even { background-color: rgba(100,100,100,0.1); }
     .repeated-header { display: none }
 }
 
-.error-updating { background-color: crimson !important };
+.error-updating { background-color: crimson !important }
+p.loading { padding: 5em; background-color: rgb(220,220,220); font-size: 1.5em; font-weight: bold; color: white;  }
 </style>

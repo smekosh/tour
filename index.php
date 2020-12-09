@@ -454,6 +454,20 @@ function admin_panel($req, $resp, $svc, $app, $template) {
     return( $app->smarty->fetch( "admin.tpl") );
 }
 
+function admin_panel_calendar($req, $resp, $svc, $app, $template) {
+    $auth = new VOA_Auth(); // die if not auth
+    $app->smarty->assign("page", "admin");
+
+    $data = admin_panel_data($req, $resp, $svc, $app, $template);
+
+    // all assignments at once
+    foreach( $data as $k => $v ) {
+        $app->smarty->assign( $k, $v );
+    }
+
+    return( $app->smarty->fetch( "admin-calendar.tpl") );
+}
+
 $klein->respond("POST", "/admin/update", function($req, $resp, $svc, $app) use ($template) {
     $auth = new VOA_Auth(); // die if not auth
     $r = array("id" => array(), "rand" => rand(), "visit_day" => $req->day );
@@ -519,6 +533,11 @@ $klein->respond("/admin/edit/", function($req, $resp, $svc, $app) use ($template
 // admin / edit / _about_ /
 $klein->respond("/admin/edit/[:slug]", function($req, $resp, $svc, $app) use ($template) {
     return(admin_edit_panel($req, $resp, $svc, $app, $template));
+});
+
+// POST admin / 2015 / 08 / table /
+$klein->respond("post", "/admin/[i:year]/[i:month]/calendar/", function($req, $resp, $svc, $app) use ($template) {
+    return(admin_panel_calendar($req, $resp, $svc, $app, $template));
 });
 
 // POST admin / edit / _about_ /
