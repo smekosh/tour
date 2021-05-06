@@ -14,7 +14,7 @@
 
 		<h3>A valid form of identification is required to enter the VOA building.</h3>
 
-		<p>The U.S. Department of Homeland Security requires visitors and guests entering all federal facilities, including the VOA building, to present a valid U.S. federal or <span class="special-highlight">REAL ID compliant</span> state-issued picture ID, such as a driver's license, passport or state-issued ID. Non-U.S. citizens are required to provide a passport. The building security guards will not accept other documents or waive these requirements. <span class="special-highlight">For more information about REAL ID, please visit: <a href="https://www.dhs.gov/real-id">https://www.dhs.gov/real-id</a></span></p>
+		<p>The U.S. Department of Homeland Security requires visitors and guests entering all federal facilities, including the VOA building, to present a valid U.S. federal or <span class="special-highlight">REAL ID compliant</span> state-issued picture ID, such as a driver's license, passport or state-issued ID. On May 3, 2023, a state issued picture ID must be <span class="special-highlight">REAL ID</span> compliant. Non-U.S. citizens are required to provide a passport. The building security guards will not accept other documents or waive these requirements. <span class="special-highlight">For more information about REAL ID, please visit: <a href="https://www.dhs.gov/real-id">https://www.dhs.gov/real-id</a></span></p>
 
 		<p>Please keep in mind that all bags and visitors will be screened. Avoid bringing unnecessary belongings. Weapons and sharp objects are prohibited.</p>
 		<p>Prohibited items include but are not limited to the following:</p>
