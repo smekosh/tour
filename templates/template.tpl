@@ -124,7 +124,7 @@
                     {block name="jumbotron"}{/block}
                 </div>
                 <div class="col-sm-6 col-md-4">
-                    {block name="calendar"}{include file="calendar.tpl"}{/block}
+                    {block name="calendar"}{*{include file="calendar.tpl"}*}{/block}
                 </div>
             </div>
         </div>
